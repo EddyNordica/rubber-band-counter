@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/EddyNordica/rubber-band-counter.svg?style=svg)](https://circleci.com/gh/EddyNordica/rubber-band-counter)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e6468ab5-3fa9-443a-a60a-f579300977ba/deploy-status)](https://app.netlify.com/sites/wagomu/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/05ec2783-3da5-4ace-8f6d-c80af13248dc/deploy-status)](https://app.netlify.com/sites/wagomu/deploys)
 
 # 輪ゴムカウンター
 
