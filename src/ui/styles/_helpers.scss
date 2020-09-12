@@ -1,0 +1,19 @@
+@mixin media-breakpoint-down($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin ui-theme ($theme) {
+  @media (prefers-color-scheme: #{$theme}) {
+    @content;
+  }
+
+  :global(.#{$theme}-ui-theme) & {
+    @content;
+  }
+
+  @if $theme == 'light' {
+    @content;
+  }
+}

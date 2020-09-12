@@ -1,0 +1,49 @@
+@mixin light-ui-theme-vars {
+  --text-color: #333;
+  --bg-color: #fff;
+}
+
+@mixin dark-ui-theme-vars {
+  --text-color: #e4e4e4;
+  --bg-color: #444;
+}
+
+@mixin linkColors--dark {
+  a {
+    color: #5cc5f1;
+  
+    &:visited {
+      color: #ed7575;
+    }
+  }
+}
+
+// System Default theme
+:root {
+  @include light-ui-theme-vars;
+}
+
+// Light theme
+@media (prefers-color-scheme: light) {
+  :root {
+    @include light-ui-theme-vars;
+  }
+}
+
+/*body*/.light-ui-theme {
+  @include light-ui-theme-vars;
+}
+
+// Dark theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include dark-ui-theme-vars;
+  }
+
+  @include linkColors--dark;
+}
+
+/*body*/.dark-ui-theme {
+  @include dark-ui-theme-vars;
+  @include linkColors--dark;
+}

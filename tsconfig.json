@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "dom-focus-lock": ["types/dom-focus-lock"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*", "**/*.test.ts"]
+}
