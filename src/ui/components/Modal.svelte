@@ -56,79 +56,79 @@
 
     height: 100%;
     width: 100%;
-  }
 
-  .modal__overlay {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    &__overlay {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-    @include ui-theme('light') {
-      --modal-bg-color__overlay: rgba(0, 0, 0, 0.4);
+      @include ui-theme('light') {
+        --modal-bg-color__overlay: rgba(0, 0, 0, 0.4);
+      }
+      @include ui-theme('dark') {
+        --modal-bg-color__overlay: rgba(255, 255, 255, 0.6);
+      }
+
+      background-color: var(--modal-bg-color__overlay);
+
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+
+      height: 100%;
+      width: 100%;
+      padding: 80px;
+
+      @include media-breakpoint-down($__breakpoint-lg) {
+        padding: 20px;
+      }
+
+      @include media-breakpoint-down($__breakpoint-sm) {
+        padding: $__spacing-unit;
+      }
     }
-    @include ui-theme('dark') {
-      --modal-bg-color__overlay: rgba(255, 255, 255, 0.6);
-    }
 
-    background-color: var(--modal-bg-color__overlay);
+    &__content-container {
+      display: flex;
+      flex-direction: column;
 
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
+      background-color: var(--bg-color);
 
-    height: 100%;
-    width: 100%;
-    padding: 80px;
-
-    @include media-breakpoint-down($__breakpoint-lg) {
       padding: 20px;
+
+      border-radius: 4px;
+
+      max-height: 100%;
+      max-width: $__breakpoint-lg;
+      min-width: 400px;
+
+      @include media-breakpoint-down($__breakpoint-md) {
+        min-width: 70vw;
+      }
     }
 
-    @include media-breakpoint-down($__breakpoint-sm) {
-      padding: $__spacing-unit;
-    }
-  }
+    &__header {
+      display: flex;
 
-  .modal__content-container {
-    display: flex;
-    flex-direction: column;
+      > .modal__title {
+        flex: 1;
+        margin-top: 0px;
+      }
 
-    background-color: var(--bg-color);
+      > .modal__close-icon {
+        flex: none;
+        margin-left: auto;
 
-    padding: 20px;
-
-    border-radius: 4px;
-
-    max-height: 100%;
-    max-width: $__breakpoint-lg;
-    min-width: 400px;
-
-    @include media-breakpoint-down($__breakpoint-md) {
-      min-width: 70vw;
-    }
-  }
-
-  .modal__header {
-    display: flex;
-
-    > .modal__title {
-      flex: 1;
-      margin-top: 0px;
+        // Subtract the same amount of padding used by the IconButton, so
+        // it aligns with the padding set around the container.
+        margin-top: -$__spacing-unit;
+        margin-right: -$__spacing-unit;
+      }
     }
 
-    > .modal__close-icon {
-      flex: none;
-      margin-left: auto;
-
-      // Subtract the same amount of padding used by the IconButton, so
-      // it aligns with the padding set around the container.
-      margin-top: -$__spacing-unit;
-      margin-right: -$__spacing-unit;
+    &__content {
+      overflow: auto;
     }
-  }
-
-  .modal__content {
-    overflow: auto;
   }
 </style>
 

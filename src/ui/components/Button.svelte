@@ -45,6 +45,14 @@
     color: var(--text-color);
     padding: $__spacing-unit;
 
+    &--fluid {
+      width: 100%;
+    }
+
+    &--tall {
+      height: 90px;
+    }
+
     &--disabled {
       cursor: default;
 
@@ -55,14 +63,6 @@
     &:not(&--disabled):active {
       background-color: var(--btn-bg-color--active);
     }
-  }
-
-  .btn--fluid {
-    width: 100%;
-  }
-
-  .btn--tall {
-    height: 90px;
   }
 </style>
 
