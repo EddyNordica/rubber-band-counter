@@ -132,7 +132,7 @@ describe('Updating counter', () => {
 
 describe('Bulk-add Buttons', () => {
   test('Using the bulk-add button does not crash when the count reaches the threshold', async () => {
-    const initialValue = Number.MAX_SAFE_INTEGER - 600;
+    const initialValue = MaxCount - 600;
     jest.spyOn(window, 'prompt').mockImplementation(() => `${initialValue}`);
 
     const { getByTestId } = render(App);
@@ -150,6 +150,6 @@ describe('Bulk-add Buttons', () => {
 
     // If adding 1000 exceeds the limit, the counter should be set to the max possible value.
     parsedCounterValue = parseInt(counterValue.textContent);
-    expect(parsedCounterValue).toBe(Number.MAX_SAFE_INTEGER);
+    expect(parsedCounterValue).toBe(MaxCount);
   });
 });

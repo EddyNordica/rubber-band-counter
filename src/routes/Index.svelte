@@ -44,7 +44,7 @@
     if (isValidCount(newCount)) {
       setCount(newCount);
     } else {
-      setCount(Number.MAX_SAFE_INTEGER);
+      setCount(MaxCount);
     }
   };
 
