@@ -39,6 +39,7 @@
       }
     }
   };
+  const bulkAdd = (amount: number): void => setCount($count + amount);
 
   const onThemeSelectionChanged = (e: Event): void => setUITheme((e.target as HTMLOptionElement).value as UITheme);
 
@@ -87,6 +88,46 @@
           fluid
           disabled={$count === 0}
           on:click={decrementCounter}
+        />
+      </ButtonStackItem>
+    </ButtonStack>
+  </Box>
+
+  <Box>
+    <ButtonStack>
+      <ButtonStackItem>
+        <Button
+          testId={TestAutomationId.CounterResetButton}
+          text="+50"
+          on:click={() => bulkAdd(50)}
+        />
+      </ButtonStackItem>
+      <ButtonStackItem>
+        <Button
+          testId={TestAutomationId.CounterResetButton}
+          text="+100"
+          on:click={() => bulkAdd(100)}
+        />
+      </ButtonStackItem>
+      <ButtonStackItem>
+        <Button
+          testId={TestAutomationId.CounterSetBUtton}
+          text="+500"
+          on:click={() => bulkAdd(500)}
+        />
+      </ButtonStackItem>
+      <ButtonStackItem>
+        <Button
+          testId={TestAutomationId.CounterSetBUtton}
+          text="+1000"
+          on:click={() => bulkAdd(1000)}
+        />
+      </ButtonStackItem>
+      <ButtonStackItem>
+        <Button
+          testId={TestAutomationId.CounterSetBUtton}
+          text="+5000"
+          on:click={() => bulkAdd(5000)}
         />
       </ButtonStackItem>
     </ButtonStack>

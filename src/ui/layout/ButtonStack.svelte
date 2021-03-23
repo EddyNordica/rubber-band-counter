@@ -10,6 +10,7 @@
 
   .btn-stack {
     display: flex;
+    flex-wrap: wrap;
 
     &--fluid {
       > :global(.btn-stack__item) {
