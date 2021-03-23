@@ -9,6 +9,8 @@
 
 <style lang="scss">
   .icon {
+    vertical-align: top;
+    
     // Use em instead of rem to resize the icon relative the font size.
     height: 1em;
     width: 1em;

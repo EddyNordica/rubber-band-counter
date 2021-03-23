@@ -8,6 +8,7 @@
   import LinkButton from '../ui/components/LinkButton.svelte';
   import Modal from '../ui/components/Modal.svelte';
   import Select from '../ui/components/Select.svelte';
+  import MessageBar from '../ui/components/MessageBar.svelte';
   import ButtonStack from '../ui/layout/ButtonStack.svelte';
   import ButtonStackItem from '../ui/layout/ButtonStackItem.svelte';
   import Page from '../ui/layout/Page.svelte';
@@ -20,6 +21,8 @@
 
   let showAboutModal = false;
   let showSettingsModal = false;
+  $: increaseDisabled = $count === MaxCount;
+  $: decreaseDisabled = $count === 0;
 
   const incrementCounter = (): void => setCount($count + 1);
   const decrementCounter = (): void => setCount($count - 1);
@@ -47,6 +50,14 @@
       setCount(MaxCount);
     }
   };
+  const bulkRemove = (amount: number): void => {
+    const newCount = $count - amount;
+    if (isValidCount(newCount)) {
+      setCount(newCount);
+    } else {
+      setCount(0);
+    }
+  };
 
   const onThemeSelectionChanged = (e: Event): void => setUITheme((e.target as HTMLOptionElement).value as UITheme);
 
@@ -59,6 +70,7 @@
 
   .wbr { display: inline-block; }
   .counter { font-size: 2.5rem; }
+  .warning-text-container { padding: 1rem 0rem; }
   .footer-actions { font-size: $__font-size-small; }
 </style>
 
@@ -82,7 +94,7 @@
         text="増やす"
         tall
         fluid
-        disabled={$count === MaxCount}
+        disabled={increaseDisabled}
         on:click={incrementCounter}
       />
     </ButtonStackItem>
@@ -92,7 +104,7 @@
         text="減らす"
         tall
         fluid
-        disabled={$count === 0}
+        disabled={decreaseDisabled}
         on:click={decrementCounter}
       />
     </ButtonStackItem>
@@ -101,36 +113,55 @@
   <ButtonStack>
     <ButtonStackItem>
       <Button
-        text="+50"
-        on:click={() => bulkAdd(50)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
+        testId={TestAutomationId.Add100Button}
         text="+100"
+        disabled={increaseDisabled}
         on:click={() => bulkAdd(100)}
       />
     </ButtonStackItem>
     <ButtonStackItem>
       <Button
         text="+500"
+        disabled={increaseDisabled}
         on:click={() => bulkAdd(500)}
       />
     </ButtonStackItem>
     <ButtonStackItem>
       <Button
-        testId={TestAutomationId.Add1000Button}
         text="+1000"
+        disabled={increaseDisabled}
         on:click={() => bulkAdd(1000)}
       />
     </ButtonStackItem>
     <ButtonStackItem>
       <Button
-        text="+5000"
-        on:click={() => bulkAdd(5000)}
+        testId={TestAutomationId.Remove100Button}
+        text="-100"
+        disabled={decreaseDisabled}
+        on:click={() => bulkRemove(100)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        text="-500"
+        disabled={decreaseDisabled}
+        on:click={() => bulkRemove(500)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        text="-1000"
+        disabled={decreaseDisabled}
+        on:click={() => bulkRemove(1000)}
       />
     </ButtonStackItem>
   </ButtonStack>
+
+  {#if increaseDisabled}
+    <div class="warning-text-container" data-testid={TestAutomationId.WarningText}>
+      <MessageBar text={"もうこれ以上は追加できません。"} type={'warning'} />
+    </div>
+  {/if}
 
   <ButtonStack>
     <ButtonStackItem>

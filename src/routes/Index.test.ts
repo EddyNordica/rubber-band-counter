@@ -79,15 +79,26 @@ describe('Counter and buttons', () => {
     const { getByTestId } = render(App);
     const increaseButton = getByTestId(TestAutomationId.IncreaseButton);
     const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
+    const counterValue = getByTestId(TestAutomationId.CounterValue);
 
+    // Verify that the warning text is not shown.
+    expect(() => getByTestId(TestAutomationId.WarningText)).toThrow();
+
+    // Set the counter to the maximum value.
     await fireEvent.click(counterSetButton);
-
-    expect(increaseButton).toBeEnabled();
-
-    await fireEvent.click(increaseButton);
 
     expect(increaseButton).toHaveAttribute('aria-disabled', 'true');
     expect(increaseButton).not.toBeDisabled();
+
+    // Try to increase the counter.
+    await fireEvent.click(increaseButton);
+
+    // Verify that clicking on the button doesn't change the count.
+    const parsedCounterValue = parseInt(counterValue.textContent);
+    expect(parsedCounterValue).toBe(MaxCount);
+
+    // Verify that the warning text is shown.
+    expect(() => getByTestId(TestAutomationId.WarningText)).not.toThrow();
   });
 });
 
@@ -130,14 +141,14 @@ describe('Updating counter', () => {
   });
 });
 
-describe('Bulk-add Buttons', () => {
-  test('Using the bulk-add button does not crash when the count reaches the threshold', async () => {
-    const initialValue = MaxCount - 600;
+describe('Bulk Buttons', () => {
+  test('Using the bulk-add button does not crash when the count overflows', async () => {
+    const initialValue = MaxCount - 60;
     jest.spyOn(window, 'prompt').mockImplementation(() => `${initialValue}`);
 
     const { getByTestId } = render(App);
     const counterValue = getByTestId(TestAutomationId.CounterValue);
-    const add1000Button = getByTestId(TestAutomationId.Add1000Button);
+    const add100Button = getByTestId(TestAutomationId.Add100Button);
     const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
 
     await fireEvent.click(counterSetButton);
@@ -146,10 +157,32 @@ describe('Bulk-add Buttons', () => {
     let parsedCounterValue = parseInt(counterValue.textContent);
     expect(parsedCounterValue).toBe(initialValue);
 
-    await fireEvent.click(add1000Button);
+    await fireEvent.click(add100Button);
 
-    // If adding 1000 exceeds the limit, the counter should be set to the max possible value.
+    // If adding 100 exceeds the limit, the counter should be set to the max possible value.
     parsedCounterValue = parseInt(counterValue.textContent);
     expect(parsedCounterValue).toBe(MaxCount);
+  });
+
+  test('Using the bulk-remove button does not crash when the count underflows', async () => {
+    const initialValue = 60;
+    jest.spyOn(window, 'prompt').mockImplementation(() => `${initialValue}`);
+
+    const { getByTestId } = render(App);
+    const counterValue = getByTestId(TestAutomationId.CounterValue);
+    const remove100Button = getByTestId(TestAutomationId.Remove100Button);
+    const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
+
+    await fireEvent.click(counterSetButton);
+
+    // Make sure the button is set to the correct value first.
+    let parsedCounterValue = parseInt(counterValue.textContent);
+    expect(parsedCounterValue).toBe(initialValue);
+
+    await fireEvent.click(remove100Button);
+
+    // If adding 100 exceeds the limit, the counter should be set to the max possible value.
+    parsedCounterValue = parseInt(counterValue.textContent);
+    expect(parsedCounterValue).toBe(0);
   });
 });
