@@ -188,6 +188,10 @@
       製作者：Eddy Nordica (<a href="https://www.twitter.com/Eddy_Nordica" target="_blank">Twitter</a>)
     </p>
 
+    <p>
+      <a href="https://github.com/EddyNordica/rubber-band-counter" target="_blank">GitHub</a>
+    </p>
+
     <h2>
       <span class="wbr">利用</span><!--
    --><span class="wbr">規約</span>
