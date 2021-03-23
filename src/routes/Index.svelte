@@ -8,7 +8,6 @@
   import LinkButton from '../ui/components/LinkButton.svelte';
   import Modal from '../ui/components/Modal.svelte';
   import Select from '../ui/components/Select.svelte';
-  import Box from '../ui/layout/Box.svelte';
   import ButtonStack from '../ui/layout/ButtonStack.svelte';
   import ButtonStackItem from '../ui/layout/ButtonStackItem.svelte';
   import Page from '../ui/layout/Page.svelte';
@@ -76,85 +75,79 @@
     <span data-testid={TestAutomationId.CounterValue}>{$count}</span>本目
   </p>
   
-  <Box>
-    <ButtonStack fluid>
-      <ButtonStackItem>
-        <Button
-          testId={TestAutomationId.IncreaseButton}
-          text="増やす"
-          tall
-          fluid
-          disabled={$count === MaxCount}
-          on:click={incrementCounter}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          testId={TestAutomationId.DecreaseButton}
-          text="減らす"
-          tall
-          fluid
-          disabled={$count === 0}
-          on:click={decrementCounter}
-        />
-      </ButtonStackItem>
-    </ButtonStack>
-  </Box>
+  <ButtonStack fluid>
+    <ButtonStackItem>
+      <Button
+        testId={TestAutomationId.IncreaseButton}
+        text="増やす"
+        tall
+        fluid
+        disabled={$count === MaxCount}
+        on:click={incrementCounter}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        testId={TestAutomationId.DecreaseButton}
+        text="減らす"
+        tall
+        fluid
+        disabled={$count === 0}
+        on:click={decrementCounter}
+      />
+    </ButtonStackItem>
+  </ButtonStack>
 
-  <Box>
-    <ButtonStack>
-      <ButtonStackItem>
-        <Button
-          text="+50"
-          on:click={() => bulkAdd(50)}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          text="+100"
-          on:click={() => bulkAdd(100)}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          text="+500"
-          on:click={() => bulkAdd(500)}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          testId={TestAutomationId.Add1000Button}
-          text="+1000"
-          on:click={() => bulkAdd(1000)}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          text="+5000"
-          on:click={() => bulkAdd(5000)}
-        />
-      </ButtonStackItem>
-    </ButtonStack>
-  </Box>
+  <ButtonStack>
+    <ButtonStackItem>
+      <Button
+        text="+50"
+        on:click={() => bulkAdd(50)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        text="+100"
+        on:click={() => bulkAdd(100)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        text="+500"
+        on:click={() => bulkAdd(500)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        testId={TestAutomationId.Add1000Button}
+        text="+1000"
+        on:click={() => bulkAdd(1000)}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        text="+5000"
+        on:click={() => bulkAdd(5000)}
+      />
+    </ButtonStackItem>
+  </ButtonStack>
 
-  <Box>
-    <ButtonStack>
-      <ButtonStackItem>
-        <Button
-          testId={TestAutomationId.CounterResetButton}
-          text="リセット"
-          on:click={resetCounter}
-        />
-      </ButtonStackItem>
-      <ButtonStackItem>
-        <Button
-          testId={TestAutomationId.CounterSetButton}
-          text="手動入力"
-          on:click={setCounter}
-        />
-      </ButtonStackItem>
-    </ButtonStack>
-  </Box>
+  <ButtonStack>
+    <ButtonStackItem>
+      <Button
+        testId={TestAutomationId.CounterResetButton}
+        text="リセット"
+        on:click={resetCounter}
+      />
+    </ButtonStackItem>
+    <ButtonStackItem>
+      <Button
+        testId={TestAutomationId.CounterSetButton}
+        text="手動入力"
+        on:click={setCounter}
+      />
+    </ButtonStackItem>
+  </ButtonStack>
   
   <div slot="footer">
     <div class="footer-actions">

@@ -24,10 +24,6 @@
         > :global(.btn-stack__item) {
           flex: none;
           margin-right: 0px!important;
-
-          &:not(:last-child) {
-            margin-bottom: $__spacing-unit;
-          }
         }
       }
     }
