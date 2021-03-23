@@ -1,8 +1,14 @@
 import { writable } from 'svelte/store';
 import { getLocalStorage } from '../lib/BrowserStorage/browserStorage';
-import { isValidInteger } from '../utils/number';
 
 const StoredCountKey = 'storedCount';
+
+export const MaxCount = Number.MAX_SAFE_INTEGER;
+
+export const isValidCount = (value: number): value is number => {
+  return !isNaN(value) && Number.isInteger(value) &&
+  value >= 0 && value <= MaxCount;
+};
 
 const getCount = (): number => {
   const storage = getLocalStorage();
@@ -12,7 +18,7 @@ const getCount = (): number => {
     return 0;
   } else {
     const parsed = parseInt(storedCount);
-    return isValidInteger(parsed) ? parsed : 0;
+    return isValidCount(parsed) ? parsed : 0;
   }
 };
 

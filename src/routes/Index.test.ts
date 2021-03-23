@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, fireEvent } from '@testing-library/svelte';
 import App from '../App.svelte';
 import { TestAutomationId } from '../app/consts/TestAutomationId';
+import { MaxCount } from '../app/counter';
 
 window.alert = jest.fn().mockImplementation(() => true);
 window.confirm = jest.fn().mockImplementation(() => true);
@@ -20,7 +21,7 @@ describe('Counter and buttons', () => {
     expect(counterValue.textContent).toBe('0');
   });
 
-  test('The increase button is enabled by defalut', () => {
+  test('The increase button is enabled by default', () => {
     const { getByTestId } = render(App);
     const increaseButton = getByTestId(TestAutomationId.IncreaseButton);
   
@@ -28,7 +29,7 @@ describe('Counter and buttons', () => {
     expect(increaseButton).toBeEnabled();
   });
   
-  test('The decrease button is diasbled by defalut', () => {
+  test('The decrease button is disabled by default', () => {
     const { getByTestId } = render(App);
     const decreaseButton = getByTestId(TestAutomationId.DecreaseButton);
   
@@ -37,7 +38,7 @@ describe('Counter and buttons', () => {
     expect(decreaseButton).not.toBeDisabled();
   });
   
-  test('Clicknig on the increase/decrease buttons updates the counter', async () => {
+  test('Clicking on the increase/decrease buttons updates the counter', async () => {
     const { getByTestId } = render(App);
     const increaseButton = getByTestId(TestAutomationId.IncreaseButton);
     const decreaseButton = getByTestId(TestAutomationId.DecreaseButton);
@@ -73,12 +74,11 @@ describe('Counter and buttons', () => {
   });
 
   test('The increase button is disabled if maximum number is reached', async () => {
-    jest.spyOn(window, 'prompt').mockImplementation(() => '9007199254740990'); // Maximum safe integer - 1.
+    jest.spyOn(window, 'prompt').mockImplementation(() => `${MaxCount}`);
 
     const { getByTestId } = render(App);
-    const counterValue = getByTestId(TestAutomationId.CounterValue);
     const increaseButton = getByTestId(TestAutomationId.IncreaseButton);
-    const counterSetButton = getByTestId(TestAutomationId.CounterSetBUtton);
+    const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
 
     await fireEvent.click(counterSetButton);
 
@@ -91,14 +91,15 @@ describe('Counter and buttons', () => {
   });
 });
 
-describe('Updating conuter', () => {
+describe('Updating counter', () => {
   const testCases = [
     { name: 'Valid integer', value: '1234567890', pass: true },
     { name: 'Parsable integer', value: '123 :)', expected: '123', pass: true },
     { name: 'Decimal number', value: '1.5', expected: '1', pass: true },
     { name: 'Zero', value: '0', pass: true },
-    { name: 'Largest possible integer', value: '9007199254740990', pass: true }, // Maximum safe interger - 1
-    { name: 'Largest possible integer + 1', value: '9007199254740991', pass: false }, // Maximum safe interger
+    { name: 'Maximum possible count - 1', value: `${MaxCount - 1}`, pass: true },
+    { name: 'Maximum possible count', value: `${MaxCount}`, pass: true },
+    { name: 'Maximum possible count + 1', value: `${MaxCount}`, pass: false },
     { name: 'Negative integer', value: '-1234567890', pass: false },
     { name: 'Invalid integer', value: '１２３', pass: false },
     { name: 'Large integer', value: '999999999999999999999999', pass: false },
@@ -111,7 +112,7 @@ describe('Updating conuter', () => {
       const { getByTestId } = render(App);
       const counterValue = getByTestId(TestAutomationId.CounterValue);
       const increaseButton = getByTestId(TestAutomationId.IncreaseButton);
-      const counterSetButton = getByTestId(TestAutomationId.CounterSetBUtton);
+      const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
 
       // Increase the counter once so setting to 0 can be tested.
       await fireEvent.click(increaseButton);
@@ -126,5 +127,29 @@ describe('Updating conuter', () => {
         expect(counterValue.textContent).toBe(originalCounterValue);
       }
     });
+  });
+});
+
+describe('Bulk-add Buttons', () => {
+  test('Using the bulk-add button does not crash when the count reaches the threshold', async () => {
+    const initialValue = Number.MAX_SAFE_INTEGER - 600;
+    jest.spyOn(window, 'prompt').mockImplementation(() => `${initialValue}`);
+
+    const { getByTestId } = render(App);
+    const counterValue = getByTestId(TestAutomationId.CounterValue);
+    const add1000Button = getByTestId(TestAutomationId.Add1000Button);
+    const counterSetButton = getByTestId(TestAutomationId.CounterSetButton);
+
+    await fireEvent.click(counterSetButton);
+
+    // Make sure the button is set to the correct value first.
+    let parsedCounterValue = parseInt(counterValue.textContent);
+    expect(parsedCounterValue).toBe(initialValue);
+
+    await fireEvent.click(add1000Button);
+
+    // If adding 1000 exceeds the limit, the counter should be set to the max possible value.
+    parsedCounterValue = parseInt(counterValue.textContent);
+    expect(parsedCounterValue).toBe(Number.MAX_SAFE_INTEGER);
   });
 });

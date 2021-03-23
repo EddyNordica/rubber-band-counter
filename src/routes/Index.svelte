@@ -1,5 +1,6 @@
 <script  lang="ts">
   import { count, setCount } from '../app/counter';
+  import { isValidCount, MaxCount } from '../app/counter';
   import { UITheme, uiTheme, setUITheme } from '../app/theming';
   import { IconName } from '../app/consts/IconName';
   import { TestAutomationId } from '../app/consts/TestAutomationId';
@@ -11,7 +12,7 @@
   import ButtonStack from '../ui/layout/ButtonStack.svelte';
   import ButtonStackItem from '../ui/layout/ButtonStackItem.svelte';
   import Page from '../ui/layout/Page.svelte';
-  import { isValidInteger } from '../utils/number';
+
 
   const AboutModalOpenBtnId = 'about-modal-opener';
   const AboutModalDescriptionId = 'about-modal-description';
@@ -32,14 +33,21 @@
     const newCount = prompt('輪ゴムの数を半角数字で入力してください。');
     if (newCount != null) {
       const parsedCount = parseInt(newCount, 10);
-      if (isValidInteger(parsedCount)) {
+      if (isValidCount(parsedCount)) {
         setCount(parsedCount);
       } else {
         alert('数が大きすぎるか有効な数字ではありません。');
       }
     }
   };
-  const bulkAdd = (amount: number): void => setCount($count + amount);
+  const bulkAdd = (amount: number): void => {
+    const newCount = $count + amount;
+    if (isValidCount(newCount)) {
+      setCount(newCount);
+    } else {
+      setCount(Number.MAX_SAFE_INTEGER);
+    }
+  };
 
   const onThemeSelectionChanged = (e: Event): void => setUITheme((e.target as HTMLOptionElement).value as UITheme);
 
@@ -76,7 +84,7 @@
           text="増やす"
           tall
           fluid
-          disabled={!isValidInteger($count)}
+          disabled={$count === MaxCount}
           on:click={incrementCounter}
         />
       </ButtonStackItem>
@@ -97,35 +105,31 @@
     <ButtonStack>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterResetButton}
           text="+50"
           on:click={() => bulkAdd(50)}
         />
       </ButtonStackItem>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterResetButton}
           text="+100"
           on:click={() => bulkAdd(100)}
         />
       </ButtonStackItem>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterSetBUtton}
           text="+500"
           on:click={() => bulkAdd(500)}
         />
       </ButtonStackItem>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterSetBUtton}
+          testId={TestAutomationId.Add1000Button}
           text="+1000"
           on:click={() => bulkAdd(1000)}
         />
       </ButtonStackItem>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterSetBUtton}
           text="+5000"
           on:click={() => bulkAdd(5000)}
         />
@@ -144,7 +148,7 @@
       </ButtonStackItem>
       <ButtonStackItem>
         <Button
-          testId={TestAutomationId.CounterSetBUtton}
+          testId={TestAutomationId.CounterSetButton}
           text="手動入力"
           on:click={setCounter}
         />
