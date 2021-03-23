@@ -1,5 +1,7 @@
 <script lang="ts">
   import classnames from 'classnames';
+  import type { IconName } from '../../app/consts/IconName';
+  import Icon from './Icon.svelte';
 
   // Used to block the invocation when the button is disabled.
   // This blocks it for both click and keyboard events.
@@ -14,6 +16,7 @@
   export let fluid: boolean = false;
   export let disabled: boolean = false;
   export let testId: string = undefined;
+  export let icon: IconName = undefined;
 </script>
 
 <style lang="scss">
@@ -78,5 +81,8 @@
   on:click={onBeforeComponentClick}
   on:click
 >
+  {#if icon != null}
+    <Icon icon={icon} />
+  {/if}
   {text}
 </button>

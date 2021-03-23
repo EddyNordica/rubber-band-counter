@@ -71,6 +71,14 @@
   .wbr { display: inline-block; }
   .counter { font-size: 2.5rem; }
   .warning-text-container { padding: 1rem 0rem; }
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    > .button-container:first-child {
+      margin-right: $__spacing-unit;
+    }
+  }
   .footer-actions { font-size: $__font-size-small; }
 </style>
 
@@ -110,52 +118,67 @@
     </ButtonStackItem>
   </ButtonStack>
 
-  <ButtonStack>
-    <ButtonStackItem>
-      <Button
-        testId={TestAutomationId.Add100Button}
-        text="+100"
-        disabled={increaseDisabled}
-        on:click={() => bulkAdd(100)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
-        text="+500"
-        disabled={increaseDisabled}
-        on:click={() => bulkAdd(500)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
-        text="+1000"
-        disabled={increaseDisabled}
-        on:click={() => bulkAdd(1000)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
-        testId={TestAutomationId.Remove100Button}
-        text="-100"
-        disabled={decreaseDisabled}
-        on:click={() => bulkRemove(100)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
-        text="-500"
-        disabled={decreaseDisabled}
-        on:click={() => bulkRemove(500)}
-      />
-    </ButtonStackItem>
-    <ButtonStackItem>
-      <Button
-        text="-1000"
-        disabled={decreaseDisabled}
-        on:click={() => bulkRemove(1000)}
-      />
-    </ButtonStackItem>
-  </ButtonStack>
+  <div class="button-row">
+    <div class="button-container">
+      <ButtonStack>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Plus}
+            testId={TestAutomationId.Add100Button}
+            text="100"
+            disabled={increaseDisabled}
+            on:click={() => bulkAdd(100)}
+          />
+        </ButtonStackItem>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Plus}
+            text="500"
+            disabled={increaseDisabled}
+            on:click={() => bulkAdd(500)}
+          />
+        </ButtonStackItem>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Plus}
+            text="1000"
+            disabled={increaseDisabled}
+            on:click={() => bulkAdd(1000)}
+          />
+        </ButtonStackItem>
+      </ButtonStack>
+    </div>
+  
+    <div class="button-container">
+      <ButtonStack>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Minus}
+            testId={TestAutomationId.Remove100Button}
+            text="100"
+            disabled={decreaseDisabled}
+            on:click={() => bulkRemove(100)}
+          />
+        </ButtonStackItem>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Minus}
+            text="500"
+            disabled={decreaseDisabled}
+            on:click={() => bulkRemove(500)}
+          />
+        </ButtonStackItem>
+        <ButtonStackItem>
+          <Button
+            icon={IconName.Minus}
+            text="1000"
+            disabled={decreaseDisabled}
+            on:click={() => bulkRemove(1000)}
+          />
+        </ButtonStackItem>
+      </ButtonStack>
+    </div>
+  </div>
 
   {#if increaseDisabled}
     <div class="warning-text-container" data-testid={TestAutomationId.WarningText}>
