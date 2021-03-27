@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { pickAnimation, shouldAnimate } from '../app/animation';
   import { TestAutomationId } from '../app/consts/TestAutomationId';
   import { counterName, counterUnit } from '../app/stores/app';
   import { counter, canIncrease, canDecrease } from '../app/stores/counter';
-  import { uiTheme } from '../app/stores/theming';
   import { counterAmount } from '../app/stores/counterAmount';
   import Animated from '../ui/components/Animated.svelte';
   import Button from '../ui/components/Button.svelte';
@@ -16,15 +14,6 @@
   import AppActions from '../ui/widgets/AppActions.svelte';
   import CounterAmountSlider from '../ui/widgets/CounterAmountSlider.svelte';
   import Footer from '../ui/widgets/Footer.svelte';
-
-  // Needs to subscribe to load the saved theming.
-  onMount(() => {
-    const unsubscribe = uiTheme.subscribe((c) => {});
-
-    return () => {
-      unsubscribe();
-    };
-  });
 </script>
 
 <style lang="scss">
