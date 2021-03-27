@@ -46,7 +46,7 @@
   }
 </style>
 
-<button data-testid={testId} {id} class="link-btn" on:click>
+<button data-testid={testId} {id} type="button" class="link-btn" on:click>
   <div class="link-btn__content">
     {#if icon}
       <span class="link-btn__icon">

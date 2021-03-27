@@ -67,5 +67,6 @@ export const createStore = <T>(
     subscribe,
     set,
     update,
+    reset: () => set(storeConfig.defaultValue),
   };
 };

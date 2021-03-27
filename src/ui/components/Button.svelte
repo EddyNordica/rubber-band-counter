@@ -10,6 +10,7 @@
   };
 
   export let text: string;
+  export let id: string | undefined = undefined;
   export let type: 'button' | 'submit' = 'button';
   export let tall: boolean = false;
   export let fluid: boolean = false;
@@ -69,6 +70,7 @@
 </style>
 
 <button
+  {id}
   {type}
   data-testid={testId}
   class={classnames(

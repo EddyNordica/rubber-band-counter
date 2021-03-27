@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { IconName } from '../../app/consts/IconName';
-  import { KeyCode } from '../../app/consts/KeyCode';
   import { onDestroy, onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import focusLock from 'dom-focus-lock';
+  import { IconName } from '../../app/consts/IconName';
+  import { KeyCode } from '../../app/consts/KeyCode';
+  import { isNonEmptyString } from '../../lib/string';
   import IconButton from './IconButton.svelte';
 
   const id = Date.now().toString(16);
@@ -12,6 +13,10 @@
   const closeBtnId = `close-btn-${id}`;
 
   const onOverlayClicked = (e: MouseEvent): void => {
+    if (isBlocking) {
+      return;
+    }
+
     if ((e.target as Element).classList?.contains('modal__overlay')) {
       onClose();
     }
@@ -27,6 +32,14 @@
     const modal = document.getElementById(modalId);
     if (modal != null) {
       focusLock.on(modal);
+    }
+
+    if (isNonEmptyString(focusedId)) {
+      const focusedElement = document.getElementById(focusedId);
+      if (focusedElement != null) {
+        focusedElement.focus();
+        return;
+      }
     }
 
     const closeBtn = document.getElementById(closeBtnId);
@@ -46,7 +59,9 @@
   export let title: string;
   export let restoreFocusId: string;
   export let onClose: () => void;
+  export let isBlocking = false;
   export let descriptionId: string | undefined = undefined;
+  export let focusedId: string | undefined = undefined;
 </script>
 
 <style lang="scss">

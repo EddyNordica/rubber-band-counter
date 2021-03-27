@@ -11,6 +11,7 @@
   import ButtonStack from '../ui/layout/ButtonStack.svelte';
   import ButtonStackItem from '../ui/layout/ButtonStackItem.svelte';
   import Page from '../ui/layout/Page.svelte';
+  import AppActions from '../ui/widgets/AppActions.svelte';
   import CounterAmountSlider from '../ui/widgets/CounterAmountSlider.svelte';
   import Footer from '../ui/widgets/Footer.svelte';
 </script>
@@ -43,10 +44,9 @@
       animation={pickAnimation($counter)}
       animate={shouldAnimate($counter)}
     >
-      <span data-testid={TestAutomationId.CounterValue} aria-live="polite">
-        {$counter}
-      </span>
-      <span>{$counterUnit}目</span>
+      <span data-testid={TestAutomationId.CounterValue} aria-live="polite"
+        >{$counter}</span
+      ><span>{$counterUnit}</span>
     </Animated>
   </div>
 
@@ -83,23 +83,7 @@
     />
   {/if}
 
-  <ButtonStack>
-    <ButtonStackItem>
-      <Button
-        testId={TestAutomationId.CounterResetButton}
-        text="リセット"
-        on:click={counter.promptReset}
-      />
-    </ButtonStackItem>
-
-    <ButtonStackItem>
-      <Button
-        testId={TestAutomationId.CounterSetButton}
-        text="手動入力"
-        on:click={counter.promptNewCount}
-      />
-    </ButtonStackItem>
-  </ButtonStack>
+  <AppActions />
 
   <Footer slot="footer" />
 </Page>

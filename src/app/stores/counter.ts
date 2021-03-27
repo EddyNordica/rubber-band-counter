@@ -1,46 +1,42 @@
 import { createStore } from './createStore';
-import { isInteger } from '../../lib/number';
+import { isPositiveInteger } from '../validations';
 
 export const MaxCount = Number.MAX_SAFE_INTEGER;
-export const isValidCount = (value: number): value is number =>
-  isInteger(value) && value >= 0 && value <= MaxCount;
+export const isValidCount = () =>
+  isPositiveInteger(true).max(MaxCount, '数が大きすぎます。');
 export const canIncrease = (count: number): boolean => count < MaxCount;
 export const canDecrease = (count: number): boolean => count > 0;
 
+const validateCount = (value: number): value is number => {
+  const schema = isValidCount();
+  return schema.isValidSync(value);
+};
+
 const createCounter = () => {
+  const DefaultCount = 0;
   const { subscribe, set, update } = createStore('storedCount', {
-    defaultValue: 0,
+    defaultValue: DefaultCount,
     parser: (value: string) => parseInt(value),
     serializer: (value: number) => `${value}`,
-    validator: isValidCount,
+    validator: validateCount,
   });
 
   return {
     subscribe,
+    set,
     addCount: (amount: number) =>
       update((c) => {
         const newCount = c + amount;
-        return isValidCount(newCount) ? newCount : MaxCount;
+        return validateCount(newCount) ? newCount : MaxCount;
       }),
     removeCount: (amount: number) =>
       update((c) => {
         const newCount = c - amount;
-        return isValidCount(newCount) ? newCount : 0;
+        return validateCount(newCount) ? newCount : DefaultCount;
       }),
     promptReset: () => {
       if (confirm('カウンターをリセットしますか？')) {
-        set(0);
-      }
-    },
-    promptNewCount: () => {
-      const newCount = prompt('輪ゴムの数を半角数字で入力してください。');
-      if (newCount != null) {
-        const parsedCount = parseInt(newCount, 10);
-        if (isValidCount(parsedCount)) {
-          set(parsedCount);
-        } else {
-          alert('数が大きすぎるか有効な数字ではありません。');
-        }
+        set(DefaultCount);
       }
     },
   };

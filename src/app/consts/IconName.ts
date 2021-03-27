@@ -4,5 +4,6 @@ export enum IconName {
   Minus = 'minus',
   Plus = 'plus',
   Remove = 'remove',
+  Trash = 'trash-alt',
   Warning = 'exclamation-triangle',
 }

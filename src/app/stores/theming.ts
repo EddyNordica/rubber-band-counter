@@ -1,5 +1,6 @@
 import { createStore, LocalStorageStore } from './createStore';
 import { UITheme } from '../consts/UITheme';
+import { DefaultAppSettings } from '../consts/DefaultAppSettings';
 
 class ThemingLocalStorageStore extends LocalStorageStore<UITheme> {
   public write(value: UITheme) {
@@ -15,10 +16,10 @@ class ThemingLocalStorageStore extends LocalStorageStore<UITheme> {
 }
 
 const createUITheme = () => {
-  const { subscribe, set } = createStore(
+  const { subscribe, set, reset } = createStore(
     'ui-theme',
     {
-      defaultValue: UITheme.Default,
+      defaultValue: DefaultAppSettings.uiTheme,
       parser: (value: string) => {
         switch (value) {
           case 'light':
@@ -36,6 +37,7 @@ const createUITheme = () => {
   return {
     subscribe,
     set,
+    reset,
   };
 };
 

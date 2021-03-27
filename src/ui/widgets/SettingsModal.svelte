@@ -1,12 +1,14 @@
 <script lang="ts">
   import { createForm } from 'svelte-forms-lib';
   import * as yup from 'yup';
+  import { IconName } from '../../app/consts/IconName';
   import { UITheme } from '../../app/consts/UITheme';
   import { counterName, counterUnit } from '../../app/stores/app';
   import { counterAmount } from '../../app/stores/counterAmount';
   import { uiTheme } from '../../app/stores/theming';
-  import { isInteger } from '../../app/validations';
+  import { isPositiveInteger } from '../../app/validations';
   import Button from '../components/Button.svelte';
+  import LinkButton from '../components/LinkButton.svelte';
   import Form from '../components/Form.svelte';
   import FormField from '../components/FormField.svelte';
   import Input from '../components/Input.svelte';
@@ -27,12 +29,9 @@
       counterAmount: `${$counterAmount}`,
     },
     validationSchema: yup.object().shape({
-      counterName: yup.string(),
+      counterName: yup.string().required('必須項目です。'),
       counterUnit: yup.string(),
-      counterAmount: isInteger().min(
-        1,
-        (params) => `${params.min}より大きい値を入力してください。`
-      ),
+      counterAmount: isPositiveInteger(),
     }),
     onSubmit: (values) => {
       counterName.set(values.counterName);
@@ -46,11 +45,39 @@
   const onThemeSelectionChanged = (e: Event): void =>
     uiTheme.set((e.target as HTMLOptionElement).value as UITheme);
 
+  const onResetButtonClicked = () => {
+    if (confirm('全ての設定を初期化しますか？')) {
+      counterName.reset();
+      $form.counterName = $counterName;
+
+      counterUnit.reset();
+      $form.counterUnit = $counterUnit;
+
+      counterAmount.reset();
+      $form.counterAmount = `${$counterAmount}`;
+
+      uiTheme.reset();
+    }
+  };
+
   export let restoreFocusId: string;
   export let onClose: () => void;
 </script>
 
-<Modal title="設定" {restoreFocusId} {onClose}>
+<style lang="scss">
+  .reset-btn {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+</style>
+
+<Modal
+  title="設定"
+  {restoreFocusId}
+  {onClose}
+  isBlocking
+  focusedId={fieldNames.counterName}
+>
   <Form onSubmit={handleSubmit}>
     <FormField
       labelFor={fieldNames.counterName}
@@ -101,6 +128,14 @@
       />
     </FormField>
 
-    <Button slot="form-footer" type="submit" fluid text="保存" />
+    <div class="reset-btn">
+      <LinkButton
+        text="設定を初期化する"
+        icon={IconName.Trash}
+        on:click={onResetButtonClicked}
+      />
+    </div>
+
+    <Button type="submit" slot="form-footer" fluid text="保存" />
   </Form>
 </Modal>

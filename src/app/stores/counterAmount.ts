@@ -1,9 +1,10 @@
 import { createStore } from './createStore';
 import { isInteger } from '../../lib/number';
+import { DefaultAppSettings } from '../consts/DefaultAppSettings';
 
 const createCounterAmount = () => {
-  const { subscribe, set } = createStore('counterAmount', {
-    defaultValue: 1,
+  const { subscribe, set, reset } = createStore('counterAmount', {
+    defaultValue: DefaultAppSettings.counterAmount,
     parser: (value: string) => parseInt(value),
     validator: (value: number) => isInteger(value) && value >= 1,
   });
@@ -11,6 +12,7 @@ const createCounterAmount = () => {
   return {
     subscribe,
     set,
+    reset,
   };
 };
 
