@@ -45,6 +45,7 @@
 
 <div class="container">
   <input
+    aria-label="一度に増減させる数"
     data-testid={TestAutomationId.CounterAmountSlider}
     class="input"
     type="range"
