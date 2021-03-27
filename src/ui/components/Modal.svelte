@@ -60,6 +60,7 @@
   export let restoreFocusId: string;
   export let onClose: () => void;
   export let isBlocking = false;
+  export let hideDismissIcon = false;
   export let descriptionId: string | undefined = undefined;
   export let focusedId: string | undefined = undefined;
 </script>
@@ -169,14 +170,16 @@
     <div class="modal__content-container">
       <div class="modal__header">
         <h1 id={titleId} class="modal__title">{title}</h1>
-        <div class="modal__close-icon">
-          <IconButton
-            id={closeBtnId}
-            title="閉じる"
-            icon={IconName.Remove}
-            on:click={onClose}
-          />
-        </div>
+        {#if !hideDismissIcon}
+          <div class="modal__close-icon">
+            <IconButton
+              id={closeBtnId}
+              title="閉じる"
+              icon={IconName.Remove}
+              on:click={onClose}
+            />
+          </div>
+        {/if}
       </div>
 
       <div class="modal__content">

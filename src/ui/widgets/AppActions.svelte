@@ -2,21 +2,27 @@
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
   import { counter } from '../../app/stores/counter';
   import Button from '../components/Button.svelte';
+  import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import ButtonStack from '../layout/ButtonStack.svelte';
   import ButtonStackItem from '../layout/ButtonStackItem.svelte';
   import PromptCountModal from './PromptCountModal.svelte';
 
+  const PromptResetButtonId = 'prompt-reset';
   const PromptCountButtonId = 'prompt-count';
 
+  let showResetDialog = false;
   let showPrompCountModal = false;
 </script>
 
 <ButtonStack>
   <ButtonStackItem>
     <Button
+      id={PromptResetButtonId}
       testId={TestAutomationId.CounterResetButton}
       text="リセット"
-      on:click={counter.promptReset}
+      on:click={() => {
+        showResetDialog = true;
+      }}
     />
   </ButtonStackItem>
 
@@ -31,6 +37,20 @@
     />
   </ButtonStackItem>
 </ButtonStack>
+
+{#if showResetDialog}
+  <ConfirmDialog
+    text="カウンターをリセットしますか？"
+    isBlocking={false}
+    restoreFocusId={PromptResetButtonId}
+    onConfirm={() => {
+      counter.reset();
+    }}
+    onClose={() => {
+      showResetDialog = false;
+    }}
+  />
+{/if}
 
 {#if showPrompCountModal}
   <PromptCountModal

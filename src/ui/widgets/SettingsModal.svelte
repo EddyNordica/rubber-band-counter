@@ -8,6 +8,7 @@
   import { uiTheme } from '../../app/stores/theming';
   import { isPositiveInteger } from '../../app/validations';
   import Button from '../components/Button.svelte';
+  import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import LinkButton from '../components/LinkButton.svelte';
   import Form from '../components/Form.svelte';
   import FormField from '../components/FormField.svelte';
@@ -45,19 +46,11 @@
   const onThemeSelectionChanged = (e: Event): void =>
     uiTheme.set((e.target as HTMLOptionElement).value as UITheme);
 
+  const ResetSettingsButtonId = 'reset-btn';
+  let showResetConfirmDialog = false;
+
   const onResetButtonClicked = () => {
-    if (confirm('全ての設定を初期化しますか？')) {
-      counterName.reset();
-      $form.counterName = $counterName;
-
-      counterUnit.reset();
-      $form.counterUnit = $counterUnit;
-
-      counterAmount.reset();
-      $form.counterAmount = `${$counterAmount}`;
-
-      uiTheme.reset();
-    }
+    showResetConfirmDialog = true;
   };
 
   export let restoreFocusId: string;
@@ -130,6 +123,7 @@
 
     <div class="reset-btn">
       <LinkButton
+        id={ResetSettingsButtonId}
         text="設定を初期化する"
         icon={IconName.Trash}
         on:click={onResetButtonClicked}
@@ -139,3 +133,25 @@
     <Button type="submit" slot="form-footer" fluid primary text="保存" />
   </Form>
 </Modal>
+
+{#if showResetConfirmDialog}
+  <ConfirmDialog
+    text="全ての設定を初期化しますか？（※カウンターの数はリセットされません。）"
+    restoreFocusId={ResetSettingsButtonId}
+    onConfirm={() => {
+      counterName.reset();
+      $form.counterName = $counterName;
+
+      counterUnit.reset();
+      $form.counterUnit = $counterUnit;
+
+      counterAmount.reset();
+      $form.counterAmount = `${$counterAmount}`;
+
+      uiTheme.reset();
+    }}
+    onClose={() => {
+      showResetConfirmDialog = false;
+    }}
+  />
+{/if}

@@ -34,7 +34,6 @@
   title="手動入力"
   {restoreFocusId}
   {onClose}
-  isBlocking
   focusedId={fieldNames.counter}
 >
   <Form onSubmit={handleSubmit}>

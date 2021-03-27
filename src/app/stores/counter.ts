@@ -14,7 +14,7 @@ const validateCount = (value: number): value is number => {
 
 const createCounter = () => {
   const DefaultCount = 0;
-  const { subscribe, set, update } = createStore('storedCount', {
+  const { subscribe, set, update, reset } = createStore('storedCount', {
     defaultValue: DefaultCount,
     parser: (value: string) => parseInt(value),
     serializer: (value: number) => `${value}`,
@@ -24,6 +24,7 @@ const createCounter = () => {
   return {
     subscribe,
     set,
+    reset,
     addCount: (amount: number) =>
       update((c) => {
         const newCount = c + amount;
@@ -34,11 +35,6 @@ const createCounter = () => {
         const newCount = c - amount;
         return validateCount(newCount) ? newCount : DefaultCount;
       }),
-    promptReset: () => {
-      if (confirm('カウンターをリセットしますか？')) {
-        set(DefaultCount);
-      }
-    },
   };
 };
 
