@@ -1,10 +1,18 @@
 <script lang="ts">
+  import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { FormFieldContextKey, FormFieldContext } from './FormFieldContext';
   import TokenizedText from './TokenizedText.svelte';
   import { isNonEmptyString } from '../../lib/string';
 
   export let labelFor: string;
   export let label: string[];
   export let error: string | undefined = undefined;
+
+  const errorId = writable<string | undefined>(undefined);
+  $: $errorId = isNonEmptyString(error) ? `error-${labelFor}` : undefined;
+
+  setContext<FormFieldContext>(FormFieldContextKey, errorId);
 </script>
 
 <style lang="scss">
@@ -23,7 +31,7 @@
   }
 </style>
 
-<div class="form-field">
+<div class="form-field" data-errorId={$errorId}>
   <label class="label" for={labelFor}>
     <TokenizedText text={label} />
   </label>
@@ -32,7 +40,7 @@
   </div>
 
   {#if isNonEmptyString(error)}
-    <div class="error">
+    <div id={$errorId} class="error">
       {error}
     </div>
   {/if}
