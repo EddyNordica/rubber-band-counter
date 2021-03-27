@@ -25,29 +25,33 @@
 
   onMount(() => {
     const modal = document.getElementById(modalId);
-    focusLock.on(modal);
+    if (modal != null) {
+      focusLock.on(modal);
+    }
 
     const closeBtn = document.getElementById(closeBtnId);
-    closeBtn.focus();
+    closeBtn?.focus();
   });
 
   onDestroy(() => {
     const modal = document.getElementById(modalId);
-    focusLock.off(modal);
+    if (modal != null) {
+      focusLock.off(modal);
+    }
 
     const restoreElement = document.getElementById(restoreFocusId);
     restoreElement?.focus();
-  })
+  });
 
   export let title: string;
-  export let descriptionId: string = undefined;
   export let restoreFocusId: string;
   export let onClose: () => void;
+  export let descriptionId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
-  @import "../styles/helpers";
-  @import "../styles/vars";
+  @import '../styles/helpers';
+  @import '../styles/vars';
 
   .modal {
     position: fixed;
@@ -142,10 +146,12 @@
   aria-labelledby={titleId}
   area-describedby={descriptionId}
 >
-
-  <div class="modal__overlay" on:click={onOverlayClicked} out:fade={{ duration: 200 }}>
+  <div
+    class="modal__overlay"
+    on:click={onOverlayClicked}
+    out:fade={{ duration: 200 }}
+  >
     <div class="modal__content-container">
-
       <div class="modal__header">
         <h1 id={titleId} class="modal__title">{title}</h1>
         <div class="modal__close-icon">
@@ -161,8 +167,6 @@
       <div class="modal__content">
         <slot />
       </div>
-
     </div>
   </div>
-
 </div>

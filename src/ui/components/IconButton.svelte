@@ -4,11 +4,11 @@
 
   export let title: string;
   export let icon: IconName;
-  export let id: string = undefined;
+  export let id: string | undefined = undefined;
 </script>
 
 <style lang="scss">
-  @import "../styles/vars";
+  @import '../styles/vars';
 
   $base-size: 1.25rem;
 
@@ -28,13 +28,6 @@
   }
 </style>
 
-<button
-  id={id}
-  class="icon-btn"
-  title={title}
-  on:click
->
-
-  <Icon icon={icon} />
-
+<button {id} class="icon-btn" {title} on:click>
+  <Icon {icon} />
 </button>

@@ -1,6 +1,6 @@
-import type { IBrowserStorage } from './IBrowserStorage';
+import type { IStorage } from './IStorage';
 
-export class InMemoryStorage implements IBrowserStorage {
+export class InMemoryStorage implements IStorage {
   private readonly data: Record<string, string>;
 
   constructor() {

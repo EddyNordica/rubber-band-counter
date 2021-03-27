@@ -1,6 +1,6 @@
 <style lang="scss">
-  @import "../styles/helpers";
-  @import "../styles/vars";
+  @import '../styles/helpers';
+  @import '../styles/vars';
 
   .page {
     margin: $__spacing-unit auto;
@@ -11,20 +11,22 @@
       max-width: none;
     }
   }
+
+  .footer {
+    margin: 1rem 0px;
+  }
 </style>
 
 <div class="page">
-
   <header>
-    <slot name="header"/>
+    <slot name="header" />
   </header>
 
   <main>
     <slot />
   </main>
 
-  <footer>
-    <slot name="footer"/>
+  <footer class="footer">
+    <slot name="footer" />
   </footer>
-
 </div>

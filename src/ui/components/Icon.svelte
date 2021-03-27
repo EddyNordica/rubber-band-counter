@@ -2,15 +2,11 @@
   import classnames from 'classnames';
   import type { IconName } from '../../app/consts/IconName';
 
-  const assetDir = '';
-
   export let icon: IconName;
 </script>
 
 <style lang="scss">
   .icon {
-    vertical-align: top;
-    
     // Use em instead of rem to resize the icon relative the font size.
     height: 1em;
     width: 1em;
@@ -20,5 +16,5 @@
 </style>
 
 <svg class={classnames('icon', `icon-${icon}`)} role="presentation">
-  <use xlink:href={`${assetDir}/icons.svg#icon-${icon}`}></use>
+  <use xlink:href={`/icons.svg#icon-${icon}`} />
 </svg>

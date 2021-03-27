@@ -1,7 +1,8 @@
 <script lang="ts">
-  export let labelId: string;
   export let value: unknown;
-  export let options: Array<{ value: unknown, label: string}>;
+  export let options: Array<{ value: unknown; label: string }>;
+  export let id: string | undefined = undefined;
+  export let name: string | undefined = undefined;
 </script>
 
 <style lang="scss">
@@ -11,19 +12,18 @@
 </style>
 
 <select
+  {id}
+  {name}
   class="select"
-  aria-labelledby={labelId}
-  value={value}
+  bind:value
   on:change
   on:blur={() => {
     // See https://github.com/sveltejs/svelte/issues/4946
   }}
 >
-
   {#each options as option}
     <option value={option.value}>
       {option.label}
     </option>
   {/each}
-
 </select>

@@ -3,13 +3,13 @@
   import type { IconName } from '../../app/consts/IconName';
 
   export let text: string;
-  export let id: string = undefined;
-  export let icon: IconName = undefined;
-  export let testId: string = undefined;
+  export let id: string | undefined = undefined;
+  export let icon: IconName | undefined = undefined;
+  export let testId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
-  @import "../styles/vars";
+  @import '../styles/vars';
 
   .link-btn {
     background-color: transparent;
@@ -46,21 +46,14 @@
   }
 </style>
 
-<button
-  data-testid={testId}
-  {id}
-  class="link-btn"
-  on:click
->
-
+<button data-testid={testId} {id} class="link-btn" on:click>
   <div class="link-btn__content">
     {#if icon}
       <span class="link-btn__icon">
-        <Icon icon={icon}/>
+        <Icon {icon} />
       </span>
     {/if}
 
     <span>{text}</span>
   </div>
-
 </button>

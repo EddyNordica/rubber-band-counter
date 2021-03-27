@@ -1,0 +1,106 @@
+<script lang="ts">
+  import { createForm } from 'svelte-forms-lib';
+  import * as yup from 'yup';
+  import { UITheme } from '../../app/consts/UITheme';
+  import { counterName, counterUnit } from '../../app/stores/app';
+  import { counterAmount } from '../../app/stores/counterAmount';
+  import { uiTheme } from '../../app/stores/theming';
+  import { isInteger } from '../../app/validations';
+  import Button from '../components/Button.svelte';
+  import Form from '../components/Form.svelte';
+  import FormField from '../components/FormField.svelte';
+  import Input from '../components/Input.svelte';
+  import Modal from '../components/Modal.svelte';
+  import Select from '../components/Select.svelte';
+
+  const fieldNames = {
+    counterName: 'counterName',
+    counterUnit: 'counterUnit',
+    counterAmount: 'counterAmount',
+    uiTheme: 'uiTheme',
+  };
+
+  const { form, errors, handleChange, handleSubmit } = createForm({
+    initialValues: {
+      counterName: $counterName,
+      counterUnit: $counterUnit,
+      counterAmount: `${$counterAmount}`,
+    },
+    validationSchema: yup.object().shape({
+      counterName: yup.string(),
+      counterUnit: yup.string(),
+      counterAmount: isInteger().min(
+        1,
+        (params) => `${params.min}より大きい値を入力してください。`
+      ),
+    }),
+    onSubmit: (values) => {
+      counterName.set(values.counterName);
+      counterUnit.set(values.counterUnit);
+      counterAmount.set(parseInt(values.counterAmount));
+
+      onClose();
+    },
+  });
+
+  const onThemeSelectionChanged = (e: Event): void =>
+    uiTheme.set((e.target as HTMLOptionElement).value as UITheme);
+
+  export let restoreFocusId: string;
+  export let onClose: () => void;
+</script>
+
+<Modal title="設定" {restoreFocusId} {onClose}>
+  <Form onSubmit={handleSubmit}>
+    <FormField
+      labelFor={fieldNames.counterName}
+      label={['カウンター名', '（例：〇〇カウンター）']}
+      error={$errors.counterName}
+    >
+      <Input
+        id={fieldNames.counterName}
+        name={fieldNames.counterName}
+        bind:value={$form.counterName}
+        on:change={handleChange}
+      />
+    </FormField>
+    <FormField
+      labelFor={fieldNames.counterUnit}
+      label={['カウンターの単位']}
+      error={$errors.counterUnit}
+    >
+      <Input
+        id={fieldNames.counterUnit}
+        name={fieldNames.counterUnit}
+        bind:value={$form.counterUnit}
+        on:change={handleChange}
+      />
+    </FormField>
+    <FormField
+      labelFor={fieldNames.counterAmount}
+      label={['一度に増減させる数']}
+      error={$errors.counterAmount}
+    >
+      <Input
+        id={fieldNames.counterAmount}
+        name={fieldNames.counterAmount}
+        bind:value={$form.counterAmount}
+        on:change={handleChange}
+      />
+    </FormField>
+    <FormField labelFor={fieldNames.uiTheme} label={['背景色']}>
+      <Select
+        id={fieldNames.uiTheme}
+        value={$uiTheme}
+        on:change={onThemeSelectionChanged}
+        options={[
+          { value: UITheme.Light, label: '明るい' },
+          { value: UITheme.Dark, label: '暗い' },
+          { value: UITheme.Default, label: 'システムの既定値' },
+        ]}
+      />
+    </FormField>
+
+    <Button slot="form-footer" type="submit" fluid text="保存" />
+  </Form>
+</Modal>

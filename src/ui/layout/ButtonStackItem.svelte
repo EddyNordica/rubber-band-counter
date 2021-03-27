@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../styles/vars";
+  @import '../styles/vars';
   .btn-stack__item {
     margin: $__spacing-unit / 2 0px;
   }

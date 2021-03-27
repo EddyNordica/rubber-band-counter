@@ -1,7 +1,5 @@
 <script lang="ts">
   import classnames from 'classnames';
-  import type { IconName } from '../../app/consts/IconName';
-  import Icon from './Icon.svelte';
 
   // Used to block the invocation when the button is disabled.
   // This blocks it for both click and keyboard events.
@@ -12,16 +10,16 @@
   };
 
   export let text: string;
+  export let type: 'button' | 'submit' = 'button';
   export let tall: boolean = false;
   export let fluid: boolean = false;
   export let disabled: boolean = false;
-  export let testId: string = undefined;
-  export let icon: IconName = undefined;
+  export let testId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
-  @import "../styles/helpers";
-  @import "../styles/vars";
+  @import '../styles/helpers';
+  @import '../styles/vars';
 
   .btn {
     @include ui-theme('light') {
@@ -54,6 +52,7 @@
 
     &--tall {
       height: 90px;
+      font-size: 1.5rem;
     }
 
     &--disabled {
@@ -70,6 +69,7 @@
 </style>
 
 <button
+  {type}
   data-testid={testId}
   class={classnames(
     'btn',
@@ -77,12 +77,9 @@
     { 'btn--fluid': fluid },
     { 'btn--disabled': disabled }
   )}
-  aria-disabled={disabled ? "true" : undefined}
+  aria-disabled={disabled ? 'true' : undefined}
   on:click={onBeforeComponentClick}
   on:click
 >
-  {#if icon != null}
-    <Icon icon={icon} />
-  {/if}
-  {text}
+  <span class="text">{text}</span>
 </button>

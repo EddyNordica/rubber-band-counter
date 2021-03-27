@@ -5,8 +5,8 @@
 </script>
 
 <style lang="scss">
-  @import "../styles/helpers";
-  @import "../styles/vars";
+  @import '../styles/helpers';
+  @import '../styles/vars';
 
   .btn-stack {
     display: flex;
@@ -17,13 +17,13 @@
         flex: 1px;
         width: 100%;
       }
-    
-      @include media-breakpoint-down($__breakpoint-md) {
+
+      @include media-breakpoint-down($__breakpoint-sm) {
         flex-wrap: wrap;
 
         > :global(.btn-stack__item) {
           flex: none;
-          margin-right: 0px!important;
+          margin-right: 0px !important;
         }
       }
     }
@@ -36,11 +36,6 @@
   }
 </style>
 
-<div class={classnames(
-  'btn-stack',
-  { ['btn-stack--fluid']: fluid }
-)}>
-
+<div class={classnames('btn-stack', { ['btn-stack--fluid']: fluid })}>
   <slot />
-
 </div>

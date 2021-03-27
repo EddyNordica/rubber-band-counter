@@ -14,10 +14,11 @@
 
   export let text: string;
   export let type: 'warning';
+  export let testId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
-  @import "../styles/helpers";
+  @import '../styles/helpers';
 
   .container {
     @include ui-theme('light') {
@@ -27,6 +28,7 @@
       --message-text-color: var(--bg-color);
     }
 
+    margin: 1rem 0px;
     padding: 10px;
     color: var(--message-text-color);
     &.warning {
@@ -40,7 +42,10 @@
   }
 </style>
 
-<div class={classnames("container", { ['warning']: type === 'warning' })}>
+<div
+  data-testid={testId}
+  class={classnames('container', { ['warning']: type === 'warning' })}
+>
   <Icon icon={getIcon()} />
   <span class="text">{text}</span>
 </div>
