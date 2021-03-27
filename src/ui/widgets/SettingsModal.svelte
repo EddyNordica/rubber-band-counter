@@ -136,6 +136,6 @@
       />
     </div>
 
-    <Button type="submit" slot="form-footer" fluid text="保存" />
+    <Button type="submit" slot="form-footer" fluid primary text="保存" />
   </Form>
 </Modal>

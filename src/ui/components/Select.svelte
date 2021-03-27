@@ -8,6 +8,7 @@
 <style lang="scss">
   .select {
     width: 100%;
+    padding: 5px;
   }
 </style>
 

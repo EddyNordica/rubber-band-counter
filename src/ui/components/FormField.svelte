@@ -16,6 +16,8 @@
 </script>
 
 <style lang="scss">
+  @import '../styles/vars';
+
   .form-field {
     margin-bottom: 1rem;
   }
@@ -27,7 +29,7 @@
   .error {
     line-height: 2;
     font-size: 0.8rem;
-    color: red;
+    color: var(--error-color);
   }
 </style>
 

@@ -51,6 +51,6 @@
       />
     </FormField>
 
-    <Button slot="form-footer" type="submit" fluid text="保存" />
+    <Button slot="form-footer" type="submit" fluid primary text="保存" />
   </Form>
 </Modal>

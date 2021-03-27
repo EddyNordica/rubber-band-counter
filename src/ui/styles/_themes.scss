@@ -1,27 +1,51 @@
 @mixin light-ui-theme-vars {
+  --primary-color-h: 204.9;
+  --primary-color-s: 100%;
+  --primary-color-l: 40.2%;
+  --primary-color: hsl(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-l)
+  );
+
   --text-color: #333;
-  --warning-color: #ffbb00;
   --bg-color: #fff;
+  --warning-color: #ffbb00;
+  --error-color: #eb0000;
+
+  --link-color: var(--primary-color);
+  --link-color--visited: #663399;
 }
 
 @mixin dark-ui-theme-vars {
-  --text-color: #e4e4e4;
-  --bg-color: #444;
-}
+  --primary-color-h: 205;
+  --primary-color-s: 100%;
+  --primary-color-l: 46.1%;
+  --primary-color: hsl(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-l)
+  );
 
-@mixin linkColors--dark {
-  a {
-    color: #5cc5f1;
-  
-    &:visited {
-      color: #ed7575;
-    }
-  }
+  --text-color: #e4e4e4;
+  --bg-color: #1e1e1e;
+  --error-color: #ff3131;
+
+  --link-color: var(--primary-color);
+  --link-color--visited: #a470cf;
 }
 
 // System Default theme
 :root {
   @include light-ui-theme-vars;
+
+  a {
+    color: var(--link-color);
+
+    &:visited {
+      color: var(--link-color--visited);
+    }
+  }
 }
 
 // Light theme
@@ -31,7 +55,7 @@
   }
 }
 
-/*body*/.light-ui-theme {
+body.light-ui-theme {
   @include light-ui-theme-vars;
 }
 
@@ -40,11 +64,8 @@
   :root {
     @include dark-ui-theme-vars;
   }
-
-  @include linkColors--dark;
 }
 
-/*body*/.dark-ui-theme {
+body.dark-ui-theme {
   @include dark-ui-theme-vars;
-  @include linkColors--dark;
 }

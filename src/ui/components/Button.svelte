@@ -12,6 +12,7 @@
   export let text: string;
   export let id: string | undefined = undefined;
   export let type: 'button' | 'submit' = 'button';
+  export let primary = false;
   export let tall: boolean = false;
   export let fluid: boolean = false;
   export let disabled: boolean = false;
@@ -47,6 +48,11 @@
     color: var(--text-color);
     padding: $__spacing-unit;
 
+    &--primary {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+    }
+
     &--fluid {
       width: 100%;
     }
@@ -63,8 +69,23 @@
       border-color: var(--btn-border-color--disabled);
     }
 
-    &:not(&--disabled):active {
-      background-color: var(--btn-bg-color--active);
+    &:not(&--disabled) {
+      &:active,
+      &:focus {
+        background-color: var(--btn-bg-color--active);
+      }
+    }
+
+    &--primary:not(&--diasbled) {
+      &:active,
+      &:focus {
+        // Descreases the lightness of the priamyr color.
+        background-color: hsl(
+          var(--primary-color-h),
+          var(--primary-color-s),
+          calc(var(--primary-color-l) - 8%)
+        );
+      }
     }
   }
 </style>
@@ -75,6 +96,7 @@
   data-testid={testId}
   class={classnames(
     'btn',
+    { 'btn--primary': primary },
     { 'btn--tall': tall },
     { 'btn--fluid': fluid },
     { 'btn--disabled': disabled }
