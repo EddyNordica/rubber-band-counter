@@ -4,9 +4,9 @@
   import { IconName } from '../../app/consts/IconName';
   import { UITheme } from '../../app/consts/UITheme';
   import { counterName, counterUnit } from '../../app/stores/app';
+  import { isValidCount } from '../../app/stores/counter';
   import { counterAmount } from '../../app/stores/counterAmount';
   import { uiTheme } from '../../app/stores/theming';
-  import { isPositiveInteger } from '../../app/validations';
   import Button from '../components/Button.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import LinkButton from '../components/LinkButton.svelte';
@@ -32,7 +32,7 @@
     validationSchema: yup.object().shape({
       counterName: yup.string().required('必須項目です。'),
       counterUnit: yup.string(),
-      counterAmount: isPositiveInteger(),
+      counterAmount: isValidCount(),
     }),
     onSubmit: (values) => {
       counterName.set(values.counterName);
