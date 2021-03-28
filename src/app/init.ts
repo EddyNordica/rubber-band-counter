@@ -1,11 +1,8 @@
 import { uiTheme } from './stores/theming';
-import { getLocalStorage } from '../lib/Storage/browserStorage';
-
-const AppVersionKey = 'version';
+import { setVersion, CurrentVersion } from './version';
 
 export const init = () => {
-  const storage = getLocalStorage();
-  storage.setItem(AppVersionKey, '1.0.0');
+  setVersion(CurrentVersion);
 
   // Load the UI theme.
   const unsubscribe = uiTheme.subscribe((c) => {});
