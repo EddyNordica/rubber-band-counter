@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { FormFieldContextKey, FormFieldContext } from './FormFieldContext';
+  import { FormFieldContextKey } from './FormFieldContext';
+  import type { FormFieldContext } from './FormFieldContext';
 
   export let value: string | number;
   export let id: string | undefined = undefined;

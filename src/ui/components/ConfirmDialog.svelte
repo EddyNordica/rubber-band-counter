@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
+
   import Button from './Button.svelte';
   import Modal from './Modal.svelte';
 
@@ -46,6 +48,7 @@
   <div class="actions">
     <div class="btn">
       <Button
+        testId={TestAutomationId.ConfirmDialogYesButton}
         primary
         fluid
         text={confirmText ?? 'はい'}
@@ -58,6 +61,7 @@
     <div class="btn">
       <Button
         id={NoButtonId}
+        testId={TestAutomationId.ConfirmDialogNoButton}
         fluid
         text={cancelText ?? 'いいえ'}
         on:click={() => {

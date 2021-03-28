@@ -1,7 +1,8 @@
 <script lang="ts">
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import { FormFieldContextKey, FormFieldContext } from './FormFieldContext';
+  import { FormFieldContextKey } from './FormFieldContext';
+  import type { FormFieldContext } from './FormFieldContext';
   import TokenizedText from './TokenizedText.svelte';
   import { isNonEmptyString } from '../../lib/string';
 

@@ -5,16 +5,16 @@ module.exports = {
     '^.+\\.svelte$': [
       'svelte-jester',
       {
-        'preprocess': true
-      }
+        preprocess: true,
+      },
     ],
-    '^.+\\.ts$': 'ts-jest'
+    '^.+\\.ts$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'svelte'],
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.test.json'
-    }
-  }
+      tsconfig: './tsconfig.test.json',
+    },
+  },
 };
