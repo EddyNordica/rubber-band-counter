@@ -1,7 +1,7 @@
 import { getLocalStorage } from '../lib/Storage/browserStorage';
 
 const AppVersionKey = 'version';
-export const CurrentVersion = '1.0.2';
+export const CurrentVersion = '1.0.3';
 
 export const getVersion = (): string => {
   const storage = getLocalStorage();
