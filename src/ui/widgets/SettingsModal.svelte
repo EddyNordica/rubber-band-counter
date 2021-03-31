@@ -32,7 +32,7 @@
     validationSchema: yup.object().shape({
       counterName: yup.string().required('必須項目です。'),
       counterUnit: yup.string(),
-      counterAmount: isValidCount(),
+      counterAmount: isValidCount(false),
     }),
     onSubmit: (values) => {
       counterName.set(values.counterName);

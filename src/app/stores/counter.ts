@@ -2,8 +2,8 @@ import { createStore } from './createStore';
 import { isPositiveInteger } from '../validations';
 
 export const MaxCount = Number.MAX_SAFE_INTEGER;
-export const isValidCount = () =>
-  isPositiveInteger(true).max(MaxCount, '数が大きすぎます。');
+export const isValidCount = (includeZero?: boolean) =>
+  isPositiveInteger(includeZero ?? true).max(MaxCount, '数が大きすぎます。');
 export const canIncrease = (count: number): boolean => count < MaxCount;
 export const canDecrease = (count: number): boolean => count > 0;
 

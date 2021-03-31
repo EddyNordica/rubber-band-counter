@@ -7,6 +7,6 @@ export const isPositiveInteger = (includeZero?: boolean) => {
     .integer('整数で入力してください。')
     .min(
       includeZero ? 0 : 1,
-      (params) => `${params.min}より大きい値を入力してください。`
+      (params) => `${params.min}以上の値を入力してください。`
     );
 };

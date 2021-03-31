@@ -23,7 +23,7 @@ const enterCounterAmount = async (
   // Wait until the modal is closed.
   await waitFor(() => {
     expectError
-      ? expect(getByTestId(TestAutomationId.FormFieldError))
+      ? expect(getByTestId(TestAutomationId.FormFieldError)).toBeInTheDocument()
       : expect(
           queryByTestId(TestAutomationId.CounterAmountInput)
         ).not.toBeInTheDocument();
@@ -246,7 +246,6 @@ describe('Settings', () => {
     // Submit the form.
     const submitFromButton = getByTestId(TestAutomationId.FormSaveButton);
     await fireEvent.click(submitFromButton);
-
     await waitFor(() => {
       expect(
         queryByTestId(TestAutomationId.FormSaveButton)
@@ -301,5 +300,43 @@ describe('Settings', () => {
     expect(parsedCounterValue).toBe(
       initialParsedCounterValue + DefaultAppSettings.counterAmount
     );
+  });
+
+  test('Counter Amount cannot be less than 1', async () => {
+    const { getByTestId, getByRole, queryByTestId } = render(App);
+
+    const settingsButton = getByTestId(TestAutomationId.AppSettingsButton);
+    await fireEvent.click(settingsButton);
+
+    // Set the counter amount to 0.
+    const dialog = getByRole('dialog');
+    const counterAmount = dialog.querySelector("[name='counterAmount']");
+    if (counterAmount != null) {
+      await fireEvent.change(counterAmount, {
+        target: { value: 0 },
+      });
+    }
+
+    // Submit the form. This should result in an error.
+    const submitFromButton = getByTestId(TestAutomationId.FormSaveButton);
+    await fireEvent.click(submitFromButton);
+    await waitFor(() => {
+      expect(getByTestId(TestAutomationId.FormFieldError)).toBeInTheDocument();
+    });
+
+    // Set the counter amount to 1.
+    if (counterAmount != null) {
+      await fireEvent.change(counterAmount, {
+        target: { value: 1 },
+      });
+    }
+
+    // Submit the form. This should succeed.
+    await fireEvent.click(submitFromButton);
+    await waitFor(() => {
+      expect(
+        queryByTestId(TestAutomationId.ModalDismissIcon)
+      ).not.toBeInTheDocument();
+    });
   });
 });
