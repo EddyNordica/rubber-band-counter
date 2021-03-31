@@ -162,7 +162,7 @@
     class="modal__overlay"
     data-testid={TestAutomationId.ModalOverlay}
     on:click={onOverlayClicked}
-    out:fade={{ duration: 200 }}
+    out:fade={{ duration: 110 }}
   >
     <div class="modal__content-container">
       <div class="modal__header">
