@@ -3,11 +3,11 @@
   import * as yup from 'yup';
   import { IconName } from '../../app/consts/IconName';
   import { UITheme } from '../../app/consts/UITheme';
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
   import { counterName, counterUnit } from '../../app/stores/app';
   import { isValidCount } from '../../app/stores/counter';
   import { counterAmount } from '../../app/stores/counterAmount';
   import { uiTheme } from '../../app/stores/theming';
-  import Button from '../components/Button.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import LinkButton from '../components/LinkButton.svelte';
   import Form from '../components/Form.svelte';
@@ -64,13 +64,7 @@
   }
 </style>
 
-<Modal
-  title="設定"
-  {restoreFocusId}
-  {onClose}
-  isBlocking
-  focusedId={fieldNames.counterName}
->
+<Modal title="設定" {restoreFocusId} {onClose} isBlocking>
   <Form onSubmit={handleSubmit}>
     <FormField
       labelFor={fieldNames.counterName}
@@ -124,13 +118,12 @@
     <div class="reset-btn">
       <LinkButton
         id={ResetSettingsButtonId}
+        testId={TestAutomationId.ResetSettingsButton}
         text="設定を初期化する"
         icon={IconName.Trash}
         on:click={onResetButtonClicked}
       />
     </div>
-
-    <Button type="submit" slot="form-footer" fluid primary text="保存" />
   </Form>
 </Modal>
 

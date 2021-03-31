@@ -1,17 +1,19 @@
 <script lang="ts">
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
+  import { randomId } from '../../lib/utils';
 
   import Button from './Button.svelte';
   import Modal from './Modal.svelte';
 
-  const NoButtonId = 'no-btn';
-  const DialogTextId = 'dialog-text';
+  const id = randomId();
+  const NoButtonId = `ConfirmDialog-no-btn-${id}`;
+  const DialogTextId = `ConfirmDialog-dialog-text-${id}`;
 
   export let text: string;
   export let restoreFocusId: string;
+  export let onClose: () => void;
   export let onConfirm: () => void;
   export let onCancel: (() => void) | undefined = undefined;
-  export let onClose: () => void;
   export let confirmText: string | undefined = undefined;
   export let cancelText: string | undefined = undefined;
   export let isBlocking = true;
@@ -44,7 +46,7 @@
   {isBlocking}
   hideDismissIcon
 >
-  <div>{text}</div>
+  <div id={DialogTextId}>{text}</div>
   <div class="actions">
     <div class="btn">
       <Button

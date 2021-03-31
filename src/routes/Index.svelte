@@ -44,9 +44,11 @@
       animation={pickAnimation($counter)}
       animate={shouldAnimate($counter)}
     >
-      <span data-testid={TestAutomationId.CounterValue} aria-live="polite"
-        >{$counter}</span
-      ><span>{$counterUnit}</span>
+      <span aria-live="polite">
+        <span data-testid={TestAutomationId.CounterValue}>{$counter}</span><span
+          >{$counterUnit}</span
+        >
+      </span>
     </Animated>
   </div>
 

@@ -5,6 +5,7 @@
   import type { FormFieldContext } from './FormFieldContext';
   import TokenizedText from './TokenizedText.svelte';
   import { isNonEmptyString } from '../../lib/string';
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
 
   export let labelFor: string;
   export let label: string[];
@@ -43,7 +44,11 @@
   </div>
 
   {#if isNonEmptyString(error)}
-    <div id={$errorId} class="error">
+    <div
+      id={$errorId}
+      class="error"
+      data-testid={TestAutomationId.FormFieldError}
+    >
       {error}
     </div>
   {/if}

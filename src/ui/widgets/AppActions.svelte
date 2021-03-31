@@ -7,8 +7,8 @@
   import ButtonStackItem from '../layout/ButtonStackItem.svelte';
   import PromptCountModal from './PromptCountModal.svelte';
 
-  const PromptResetButtonId = 'prompt-reset';
-  const PromptCountButtonId = 'prompt-count';
+  const PromptResetButtonId = 'AppActions-prompt-reset';
+  const PromptCountButtonId = 'AppAcitons-prompt-count';
 
   let showResetDialog = false;
   let showPrompCountModal = false;
@@ -41,7 +41,6 @@
 {#if showResetDialog}
   <ConfirmDialog
     text="カウンターをリセットしますか？"
-    isBlocking={false}
     restoreFocusId={PromptResetButtonId}
     onConfirm={() => {
       counter.reset();

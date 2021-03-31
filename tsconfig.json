@@ -4,9 +4,6 @@
     "strict": true,
     "baseUrl": ".",
     "rootDir": "src",
-    "paths": {
-      "dom-focus-lock": ["types/dom-focus-lock"]
-    }
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*", "**/*.test.ts"]

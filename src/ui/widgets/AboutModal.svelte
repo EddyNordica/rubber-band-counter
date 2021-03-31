@@ -3,7 +3,7 @@
   import Link from '../components/Link.svelte';
   import Modal from '../components/Modal.svelte';
 
-  const AboutModalDescriptionId = 'about-modal-description';
+  const AboutModalDescriptionId = 'AboutModal-description';
 
   export let restoreFocusId: string;
   export let onClose: () => void;

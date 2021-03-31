@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
+  import Button from './Button.svelte';
   export let onSubmit: () => void;
 </script>
 
@@ -11,6 +13,13 @@
 <form on:submit|preventDefault={onSubmit}>
   <slot />
   <div class="form-footer">
-    <slot name="form-footer" />
+    <Button
+      testId={TestAutomationId.FormSaveButton}
+      type="submit"
+      slot="form-footer"
+      fluid
+      primary
+      text="保存"
+    />
   </div>
 </form>

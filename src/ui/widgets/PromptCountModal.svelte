@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createForm } from 'svelte-forms-lib';
   import * as yup from 'yup';
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
   import { counter, isValidCount } from '../../app/stores/counter';
-  import Button from '../components/Button.svelte';
   import Form from '../components/Form.svelte';
   import FormField from '../components/FormField.svelte';
   import Input from '../components/Input.svelte';
@@ -43,13 +43,12 @@
       error={$errors.counter}
     >
       <Input
+        testId={TestAutomationId.CounterAmountInput}
         id={fieldNames.counter}
         name={fieldNames.counter}
         bind:value={$form.counter}
         on:change={handleChange}
       />
     </FormField>
-
-    <Button slot="form-footer" type="submit" fluid primary text="保存" />
   </Form>
 </Modal>

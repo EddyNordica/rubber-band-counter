@@ -2,7 +2,7 @@
   "name": "rubber-band-counter",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run test && rollup -c",
     "dev": "npx del-cli public/build --force && rollup -c -w",
     "start": "sirv public --host 0.0.0.0",
     "validate": "svelte-check --fail-on-warnings",
@@ -40,7 +40,7 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "classnames": "^2.2.6",
-    "dom-focus-lock": "^1.0.4",
+    "focus-trap": "^6.3.0",
     "normalize.css": "^8.0.1",
     "svelte-forms-lib": "^1.10.1",
     "yup": "^0.32.9"

@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
-  import focusLock from 'dom-focus-lock';
+  import * as focusTrap from 'focus-trap';
   import { IconName } from '../../app/consts/IconName';
   import { KeyCode } from '../../app/consts/KeyCode';
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
   import { isNonEmptyString } from '../../lib/string';
+  import { randomId } from '../../lib/utils';
   import IconButton from './IconButton.svelte';
 
-  const id = Date.now().toString(16);
-  const modalId = `modal-${id}`;
-  const titleId = `title-${id}`;
-  const closeBtnId = `close-btn-${id}`;
+  const id = randomId();
+  const ModalId = `Modal-modal-${id}`;
+  const TitleId = `Modal-title-${id}`;
+  const CloseBtnId = `Modal-close-btn-${id}`;
 
   const onOverlayClicked = (e: MouseEvent): void => {
     if (isBlocking) {
@@ -29,31 +31,25 @@
   };
 
   onMount(() => {
-    const modal = document.getElementById(modalId);
-    if (modal != null) {
-      focusLock.on(modal);
+    const modal = document.getElementById(ModalId);
+    if (modal == null) {
+      throw new Error('Modal element was not found.');
     }
 
-    if (isNonEmptyString(focusedId)) {
-      const focusedElement = document.getElementById(focusedId);
-      if (focusedElement != null) {
-        focusedElement.focus();
-        return;
-      }
-    }
+    const trap = focusTrap.createFocusTrap(modal, {
+      initialFocus: isNonEmptyString(focusedId) ? `#${focusedId}` : undefined,
+    });
+    trap.activate();
 
-    const closeBtn = document.getElementById(closeBtnId);
+    const closeBtn = document.getElementById(CloseBtnId);
     closeBtn?.focus();
-  });
 
-  onDestroy(() => {
-    const modal = document.getElementById(modalId);
-    if (modal != null) {
-      focusLock.off(modal);
-    }
+    return () => {
+      trap.deactivate();
 
-    const restoreElement = document.getElementById(restoreFocusId);
-    restoreElement?.focus();
+      const restoreElement = document.getElementById(restoreFocusId);
+      restoreElement?.focus();
+    };
   });
 
   export let title: string;
@@ -155,25 +151,27 @@
 <svelte:body on:keyup={onBodyKeyUp} />
 
 <div
-  id={modalId}
+  id={ModalId}
   class="modal"
   role="dialog"
   aria-modal={true}
-  aria-labelledby={titleId}
-  area-describedby={descriptionId}
+  aria-labelledby={TitleId}
+  aria-describedby={descriptionId}
 >
   <div
     class="modal__overlay"
+    data-testid={TestAutomationId.ModalOverlay}
     on:click={onOverlayClicked}
     out:fade={{ duration: 200 }}
   >
     <div class="modal__content-container">
       <div class="modal__header">
-        <h1 id={titleId} class="modal__title">{title}</h1>
+        <h1 id={TitleId} class="modal__title">{title}</h1>
         {#if !hideDismissIcon}
           <div class="modal__close-icon">
             <IconButton
-              id={closeBtnId}
+              id={CloseBtnId}
+              testId={TestAutomationId.ModalDismissIcon}
               title="閉じる"
               icon={IconName.Remove}
               on:click={onClose}

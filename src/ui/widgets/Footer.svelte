@@ -5,9 +5,10 @@
   import ButtonStack from '../layout/ButtonStack.svelte';
   import ButtonStackItem from '../layout/ButtonStackItem.svelte';
   import { IconName } from '../../app/consts/IconName';
+  import { TestAutomationId } from '../../app/consts/TestAutomationId';
 
-  const AboutModalOpenBtnId = 'about-modal-opener';
-  const SettingsModalOpenBtnId = 'settings-modal-opener';
+  const AboutModalOpenBtnId = 'Footer-about-modal';
+  const SettingsModalOpenBtnId = 'Footer-settings-modal';
 
   let showAboutModal = false;
   let showSettingsModal = false;
@@ -36,6 +37,7 @@
     <ButtonStackItem>
       <LinkButton
         id={SettingsModalOpenBtnId}
+        testId={TestAutomationId.AppSettingsButton}
         text="設定"
         icon={IconName.Cogwheel}
         on:click={() => {

@@ -3,11 +3,12 @@
   import { FormFieldContextKey } from './FormFieldContext';
   import type { FormFieldContext } from './FormFieldContext';
 
+  const errorId = getContext<FormFieldContext>(FormFieldContextKey);
+
   export let value: string | number;
   export let id: string | undefined = undefined;
   export let name: string | undefined = undefined;
-
-  const errorId = getContext<FormFieldContext>(FormFieldContextKey);
+  export let testId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
@@ -21,7 +22,9 @@
 <input
   {id}
   {name}
+  data-testid={testId}
   class="input"
+  type="text"
   aria-describedby={$errorId}
   bind:value
   on:change

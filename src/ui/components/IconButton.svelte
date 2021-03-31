@@ -5,6 +5,7 @@
   export let title: string;
   export let icon: IconName;
   export let id: string | undefined = undefined;
+  export let testId: string | undefined = undefined;
 </script>
 
 <style lang="scss">
@@ -28,6 +29,6 @@
   }
 </style>
 
-<button {id} class="icon-btn" {title} on:click>
+<button {id} class="icon-btn" {title} data-testid={testId} on:click>
   <Icon {icon} />
 </button>
