@@ -52,6 +52,9 @@
     min="0"
     max="500"
     step="10"
+    aria-valuemin="1"
+    aria-valuemax="500"
+    aria-valuenow={$counterAmount}
     value={$counterAmount}
     on:input={onInput}
   />
