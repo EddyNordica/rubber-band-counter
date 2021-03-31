@@ -25,6 +25,11 @@
   };
 
   const onBodyKeyUp = (e: KeyboardEvent): void => {
+    const modals = document.querySelectorAll("[role='dialog']");
+    if (modals[modals.length - 1]?.id !== ModalId) {
+      return;
+    }
+
     if (e.code === KeyCode.Escape) {
       onClose();
     }
