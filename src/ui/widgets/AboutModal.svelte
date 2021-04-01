@@ -64,22 +64,6 @@
   </h2>
 
   <p>
-    当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。このGoogleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
-  </p>
-
-  <p>
-    この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は
-    <Link
-      text="Googleアナリティクスサービス利用規約"
-      href="https://marketingplatform.google.com/about/analytics/terms/jp/"
-      external
-    />
-    のページや
-    <Link
-      text="Googleポリシーと規約"
-      href="https://policies.google.com/technologies/ads?hl=ja"
-      external
-    />
-    のページをご覧ください。
+    当サイトでは、エラーやクラッシュを監視するために当サイト内でのユーザー行動情報を一部データ化して収集しています。このデータは匿名であり、個人を特定するものではありません。
   </p>
 </Modal>
