@@ -2,7 +2,7 @@
   "name": "rubber-band-counter",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm run test && rollup -c",
+    "build": "npm run validate && npm run test && rollup -c",
     "dev": "npx del-cli public/build --force && rollup -c -w",
     "start": "sirv public --host 0.0.0.0",
     "validate": "svelte-check --fail-on-warnings",
