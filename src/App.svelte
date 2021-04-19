@@ -6,7 +6,7 @@
 
   try {
     new Rollbar({
-      accessToken: '61c914e7f5bd4fca9d22b5f65f1d4b06',
+      accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
       captureUncaught: true,
       captureUnhandledRejections: true,
       captureIp: false,
