@@ -16,7 +16,7 @@
   export let onCancel: (() => void) | undefined = undefined;
   export let confirmText: string | undefined = undefined;
   export let cancelText: string | undefined = undefined;
-  export let isBlocking = true;
+  export let isBlocking = false;
 </script>
 
 <style lang="scss">
