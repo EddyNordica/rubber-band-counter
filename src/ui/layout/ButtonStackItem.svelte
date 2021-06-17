@@ -1,7 +1,8 @@
 <style lang="scss">
+  @use 'sass:math';
   @import '../styles/vars';
   .btn-stack__item {
-    margin: $__spacing-unit / 2 0px;
+    margin: math.div($__spacing-unit, 2) 0px;
   }
 </style>
 

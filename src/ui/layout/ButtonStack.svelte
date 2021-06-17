@@ -28,10 +28,8 @@
       }
     }
 
-    > :global(.btn-stack__item) {
-      &:not(:last-child) {
-        margin-right: $__spacing-unit;
-      }
+    > :global(.btn-stack__item:not(:last-child)) {
+      margin-right: $__spacing-unit;
     }
   }
 </style>
