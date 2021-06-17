@@ -6,7 +6,7 @@
     margin: $__spacing-unit auto;
     max-width: $__breakpoint-lg;
 
-    @include media-breakpoint-down($__breakpoint-lg) {
+    @include media-h-breakpoint-down($__breakpoint-lg) {
       margin: $__spacing-unit;
       max-width: none;
     }

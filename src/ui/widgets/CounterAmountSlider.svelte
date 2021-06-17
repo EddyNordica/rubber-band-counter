@@ -31,7 +31,7 @@
     margin-right: $__spacing-unit;
   }
 
-  @include media-breakpoint-down($__breakpoint-sm) {
+  @include media-h-breakpoint-down($__breakpoint-sm) {
     .input {
       width: 100%;
       text-align: right;

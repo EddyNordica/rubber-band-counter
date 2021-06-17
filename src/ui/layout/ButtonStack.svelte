@@ -18,7 +18,7 @@
         width: 100%;
       }
 
-      @include media-breakpoint-down($__breakpoint-sm) {
+      @include media-h-breakpoint-down($__breakpoint-sm) {
         flex-wrap: wrap;
 
         > :global(.btn-stack__item) {

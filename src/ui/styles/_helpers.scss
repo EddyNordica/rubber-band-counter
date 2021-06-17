@@ -1,10 +1,16 @@
-@mixin media-breakpoint-down($breakpoint) {
+@mixin media-h-breakpoint-down($breakpoint) {
   @media (max-width: $breakpoint) {
     @content;
   }
 }
 
-@mixin ui-theme ($theme) {
+@mixin media-v-breakpoint-down($breakpoint) {
+  @media (max-height: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin ui-theme($theme) {
   @media (prefers-color-scheme: #{$theme}) {
     @content;
   }

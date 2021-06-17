@@ -67,6 +67,7 @@
 </script>
 
 <style lang="scss">
+  @use 'sass:math';
   @import '../styles/helpers';
   @import '../styles/vars';
 
@@ -100,12 +101,17 @@
       width: 100%;
       padding: 80px;
 
-      @include media-breakpoint-down($__breakpoint-lg) {
+      @include media-h-breakpoint-down($__breakpoint-lg) {
         padding: 20px;
       }
 
-      @include media-breakpoint-down($__breakpoint-sm) {
-        padding: $__spacing-unit;
+      @include media-h-breakpoint-down($__breakpoint-sm) {
+        padding: math.div($__spacing-unit, 2);
+      }
+
+      @include media-v-breakpoint-down($__breakpoint-sm) {
+        padding-top: math.div($__spacing-unit, 2);
+        padding-bottom: math.div($__spacing-unit, 2);
       }
     }
 
@@ -123,8 +129,17 @@
       max-width: $__breakpoint-lg;
       min-width: 400px;
 
-      @include media-breakpoint-down($__breakpoint-md) {
+      @include media-h-breakpoint-down($__breakpoint-md) {
         min-width: 70vw;
+      }
+
+      @include media-h-breakpoint-down($__breakpoint-sm) {
+        padding: 10px;
+      }
+
+      @include media-v-breakpoint-down($__breakpoint-sm) {
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
     }
 
@@ -134,6 +149,11 @@
       > .modal__title {
         flex: 1;
         margin-top: 0px;
+
+        @include media-v-breakpoint-down($__breakpoint-sm) {
+          font-size: 1.5rem;
+          margin-bottom: 0px;
+        }
       }
 
       > .modal__close-icon {
