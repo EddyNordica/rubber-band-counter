@@ -1,6 +1,6 @@
 {
   "name": "rubber-band-counter",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "scripts": {
     "build": "npm run validate && npm run test && rollup -c",
     "dev": "npx del-cli public/build --force && rollup -c -w",
