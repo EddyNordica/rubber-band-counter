@@ -35,6 +35,7 @@
   {restoreFocusId}
   {onClose}
   focusedId={fieldNames.counter}
+  isBlocking
 >
   <Form onSubmit={handleSubmit}>
     <FormField
