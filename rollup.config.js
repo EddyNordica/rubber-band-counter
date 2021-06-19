@@ -64,9 +64,8 @@ export default {
     }),
     commonjs(),
     typescript({
-      // See https://stackoverflow.com/questions/63218218/rollup-is-not-generating-typescript-sourcemap
-      // See https://github.com/sveltejs/template/issues/145
-      sourceMap: false,
+      sourceMap: !production,
+      inlineSources: !production,
     }),
     scss({
       output: 'public/build/app.css',

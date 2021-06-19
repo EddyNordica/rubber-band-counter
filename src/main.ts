@@ -1,3 +1,4 @@
+import 'svelte';
 import './ui/styles/app.scss';
 import App from './App.svelte';
 
