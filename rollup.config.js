@@ -44,14 +44,18 @@ export default {
     file: 'public/build/bundle.js',
   },
   plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(
+        production ? 'production' : 'development'
+      ),
+      'process.env.ROLLBAR_ACCESS_TOKEN': JSON.stringify(
+        process.env.ROLLBAR_ACCESS_TOKEN
+      ),
+    }),
     svelte({
       // enable run-time checks when not in production
       dev: !production,
       preprocess: sveltePreprocess({ postcss: true }),
-    }),
-    replace({
-      preventAssignment: true,
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In

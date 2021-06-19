@@ -4,18 +4,17 @@
   import { init } from './app/init';
   import Index from './routes/Index.svelte';
 
-  try {
+  if (process.env.NODE_ENV === 'production') {
     new Rollbar({
       accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
       captureUncaught: true,
       captureUnhandledRejections: true,
       captureIp: false,
+      enabled: process.env.NODE_ENV === 'production',
       payload: {
         environment: process.env.NODE_ENV,
       },
     });
-  } catch (e) {
-    // For making jest test to run.
   }
 
   onMount(init);
