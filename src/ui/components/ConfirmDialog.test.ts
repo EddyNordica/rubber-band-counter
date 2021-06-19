@@ -20,7 +20,7 @@ test('Focus is set on the No button on mount', (done) => {
   }, 0);
 });
 
-test('It is a blocking dialog', async () => {
+test('It is not a blocking dialog', async () => {
   let onCloseInvoked = false;
   const { getByTestId } = render(ConfirmDialog, {
     ...DefaultConfirmDialogOptions,
@@ -32,7 +32,7 @@ test('It is a blocking dialog', async () => {
 
   await fireEvent.click(overlay);
 
-  expect(onCloseInvoked).toBe(false);
+  expect(onCloseInvoked).toBe(true);
 });
 
 test('Description Id is set', () => {

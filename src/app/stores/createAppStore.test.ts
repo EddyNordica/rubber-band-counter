@@ -1,5 +1,5 @@
 import type { IStorage } from '../../lib/Storage/IStorage';
-import { AppStorageStoreConfig } from './StorageStores/AppStorageStore';
+import type { AppStorageStoreConfig } from './StorageStores/AppStorageStore';
 import { LocalStorageStore } from './StorageStores/LocalStorageStore';
 
 class ExposedLocalStorageStore<T> extends LocalStorageStore<T> {
