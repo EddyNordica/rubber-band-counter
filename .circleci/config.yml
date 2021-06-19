@@ -13,3 +13,6 @@ jobs:
           command: npm run validate
       - run:
           command: npm run test
+      - run:
+          name: Deploy
+          command: curl -X POST -d {} ${DEPLOY_HOOK_URL}
