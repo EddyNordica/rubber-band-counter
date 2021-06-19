@@ -4,7 +4,8 @@
   import { IconName } from '../../app/consts/IconName';
   import { UITheme } from '../../app/consts/UITheme';
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counterName, counterUnit } from '../../app/stores/app';
+  import { counterName } from '../../app/stores/counterName';
+  import { counterUnit } from '../../app/stores/counterUnit';
   import { isValidCount } from '../../app/stores/counter';
   import { counterAmount } from '../../app/stores/counterAmount';
   import { uiTheme } from '../../app/stores/theming';

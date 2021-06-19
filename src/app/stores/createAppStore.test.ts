@@ -1,5 +1,6 @@
 import type { IStorage } from '../../lib/Storage/IStorage';
-import { LocalStorageStore, LocalStorageStoreConfig } from './createStore';
+import { AppStorageStoreConfig } from './StorageStores/AppStorageStore';
+import { LocalStorageStore } from './StorageStores/LocalStorageStore';
 
 class ExposedLocalStorageStore<T> extends LocalStorageStore<T> {
   public get exposedStorage(): IStorage {
@@ -8,7 +9,7 @@ class ExposedLocalStorageStore<T> extends LocalStorageStore<T> {
 }
 
 const StorageKey = 'test-store';
-const DefaultLocalStorageStoreConfig: LocalStorageStoreConfig<number> = {
+const DefaultLocalStorageStoreConfig: AppStorageStoreConfig<number> = {
   defaultValue: 100,
   parser: (value: string): number => parseInt(value) * 10,
   serializer: (value: number): string => `Written Value: ${value}`,

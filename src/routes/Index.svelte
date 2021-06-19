@@ -1,7 +1,8 @@
 <script lang="ts">
   import { pickAnimation, shouldAnimate } from '../app/animation';
   import { TestAutomationId } from '../app/consts/TestAutomationId';
-  import { counterName, counterUnit } from '../app/stores/app';
+  import { counterName } from '../app/stores/counterName';
+  import { counterUnit } from '../app/stores/counterUnit';
   import { counter, canIncrease, canDecrease } from '../app/stores/counter';
   import { counterAmount } from '../app/stores/counterAmount';
   import Animated from '../ui/components/Animated.svelte';

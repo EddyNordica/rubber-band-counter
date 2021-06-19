@@ -1,6 +1,7 @@
-import { createStore, LocalStorageStore } from './createStore';
 import { UITheme } from '../consts/UITheme';
 import { DefaultAppSettings } from '../consts/DefaultAppSettings';
+import { LocalStorageStore } from './StorageStores/LocalStorageStore';
+import { createAppStore } from './createAppStore';
 
 class ThemingLocalStorageStore extends LocalStorageStore<UITheme> {
   public write(value: UITheme) {
@@ -16,7 +17,7 @@ class ThemingLocalStorageStore extends LocalStorageStore<UITheme> {
 }
 
 const createUITheme = () => {
-  const { subscribe, set, reset } = createStore(
+  const { subscribe, set, reset } = createAppStore(
     'ui-theme',
     {
       defaultValue: DefaultAppSettings.uiTheme,

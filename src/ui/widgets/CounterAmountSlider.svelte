@@ -1,6 +1,6 @@
 <script lang="ts">
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counterUnit } from '../../app/stores/app';
+  import { counterUnit } from '../../app/stores/counterUnit';
   import { counterAmount } from '../../app/stores/counterAmount';
 
   const onInput = (e: Event) => {

@@ -1,4 +1,4 @@
-import { createStore } from './createStore';
+import { createAppStore } from './createAppStore';
 import { isPositiveInteger } from '../validations';
 
 export const MaxCount = Number.MAX_SAFE_INTEGER;
@@ -14,7 +14,7 @@ const validateCount = (value: number): value is number => {
 
 const createCounter = () => {
   const DefaultCount = 0;
-  const { subscribe, set, update, reset } = createStore('storedCount', {
+  const { subscribe, set, update, reset } = createAppStore('storedCount', {
     defaultValue: DefaultCount,
     parser: (value: string) => parseInt(value),
     serializer: (value: number) => `${value}`,

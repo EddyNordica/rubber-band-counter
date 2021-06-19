@@ -1,4 +1,4 @@
-import { createStore } from './createStore';
+import { createAppStore } from './createAppStore';
 import { isValidCount } from '../stores/counter';
 import { DefaultAppSettings } from '../consts/DefaultAppSettings';
 
@@ -8,7 +8,7 @@ const validateCount = (value: number): value is number => {
 };
 
 const createCounterAmount = () => {
-  const { subscribe, set, reset } = createStore('counterAmount', {
+  const { subscribe, set, reset } = createAppStore('counterAmount', {
     defaultValue: DefaultAppSettings.counterAmount,
     parser: (value: string) => parseInt(value),
     validator: validateCount,
