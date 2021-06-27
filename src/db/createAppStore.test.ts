@@ -1,4 +1,4 @@
-import type { IStorage } from '../../lib/Storage/IStorage';
+import type { IStorage } from '../lib/Storage/IStorage';
 import type { AppStorageStoreConfig } from './StorageStores/AppStorageStore';
 import { LocalStorageStore } from './StorageStores/LocalStorageStore';
 

@@ -1,5 +1,5 @@
-import { getLocalStorage } from '../../../lib/Storage/browserStorage';
-import type { IStorage } from '../../../lib/Storage/IStorage';
+import { getLocalStorage } from '../../lib/Storage/browserStorage';
+import type { IStorage } from '../../lib/Storage/IStorage';
 import type { AppStorageStoreConfig, AppStorageStore } from './AppStorageStore';
 
 export class LocalStorageStore<T> implements AppStorageStore<T> {

@@ -1,5 +1,5 @@
 import { createAppStore } from './createAppStore';
-import { isPositiveInteger } from '../validations';
+import { isPositiveInteger } from '../app/validations';
 
 export const MaxCount = Number.MAX_SAFE_INTEGER;
 export const isValidCount = (includeZero?: boolean) =>

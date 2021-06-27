@@ -1,10 +1,10 @@
 <script lang="ts">
   import { pickAnimation, shouldAnimate } from '../app/animation';
   import { TestAutomationId } from '../app/consts/TestAutomationId';
-  import { counterName } from '../app/stores/counterName';
-  import { counterUnit } from '../app/stores/counterUnit';
-  import { counter, canIncrease, canDecrease } from '../app/stores/counter';
-  import { counterAmount } from '../app/stores/counterAmount';
+  import { counterName } from '../db/counterName';
+  import { counterUnit } from '../db/counterUnit';
+  import { counter, canIncrease, canDecrease } from '../db/counter';
+  import { counterAmount } from '../db/counterAmount';
   import Animated from '../ui/components/Animated.svelte';
   import Button from '../ui/components/Button.svelte';
   import MessageBar from '../ui/components/MessageBar.svelte';

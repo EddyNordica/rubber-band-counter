@@ -2,7 +2,7 @@
   import { createForm } from 'svelte-forms-lib';
   import * as yup from 'yup';
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counter, isValidCount } from '../../app/stores/counter';
+  import { counter, isValidCount } from '../../db/counter';
   import Form from '../components/Form.svelte';
   import FormField from '../components/FormField.svelte';
   import Input from '../components/Input.svelte';

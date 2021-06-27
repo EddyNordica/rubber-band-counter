@@ -1,6 +1,6 @@
 <script lang="ts">
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counter } from '../../app/stores/counter';
+  import { counter } from '../../db/counter';
   import Button from '../components/Button.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import ButtonStack from '../layout/ButtonStack.svelte';

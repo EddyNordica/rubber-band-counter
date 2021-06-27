@@ -1,4 +1,4 @@
-import { uiTheme } from './stores/theming';
+import { uiTheme } from '../db/theming';
 import { setVersion, CurrentVersion } from './version';
 
 export const init = () => {

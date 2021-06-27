@@ -1,6 +1,6 @@
 import { createAppStore } from './createAppStore';
-import { isValidCount } from '../stores/counter';
-import { DefaultAppSettings } from '../consts/DefaultAppSettings';
+import { isValidCount } from './counter';
+import { DefaultAppSettings } from '../app/consts/DefaultAppSettings';
 
 const validateCount = (value: number): value is number => {
   const schema = isValidCount();

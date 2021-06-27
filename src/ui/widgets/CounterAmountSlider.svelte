@@ -1,7 +1,7 @@
 <script lang="ts">
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counterUnit } from '../../app/stores/counterUnit';
-  import { counterAmount } from '../../app/stores/counterAmount';
+  import { counterUnit } from '../../db/counterUnit';
+  import { counterAmount } from '../../db/counterAmount';
 
   const onInput = (e: Event) => {
     const element = e.target as HTMLInputElement;

@@ -4,11 +4,11 @@
   import { IconName } from '../../app/consts/IconName';
   import { UITheme } from '../../app/consts/UITheme';
   import { TestAutomationId } from '../../app/consts/TestAutomationId';
-  import { counterName } from '../../app/stores/counterName';
-  import { counterUnit } from '../../app/stores/counterUnit';
-  import { isValidCount } from '../../app/stores/counter';
-  import { counterAmount } from '../../app/stores/counterAmount';
-  import { uiTheme } from '../../app/stores/theming';
+  import { counterName } from '../../db/counterName';
+  import { counterUnit } from '../../db/counterUnit';
+  import { isValidCount } from '../../db/counter';
+  import { counterAmount } from '../../db/counterAmount';
+  import { uiTheme } from '../../db/theming';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import LinkButton from '../components/LinkButton.svelte';
   import Form from '../components/Form.svelte';

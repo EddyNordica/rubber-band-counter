@@ -1,5 +1,5 @@
 import { createAppStore } from './createAppStore';
-import { DefaultAppSettings } from '../consts/DefaultAppSettings';
+import { DefaultAppSettings } from '../app/consts/DefaultAppSettings';
 
 const createCounterName = () => {
   const { subscribe, set, reset } = createAppStore('counterName', {

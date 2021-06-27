@@ -1,5 +1,5 @@
-import { UITheme } from '../consts/UITheme';
-import { DefaultAppSettings } from '../consts/DefaultAppSettings';
+import { UITheme } from '../app/consts/UITheme';
+import { DefaultAppSettings } from '../app/consts/DefaultAppSettings';
 import { LocalStorageStore } from './StorageStores/LocalStorageStore';
 import { createAppStore } from './createAppStore';
 

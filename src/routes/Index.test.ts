@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor, Matcher } from '@testing-library/svelte';
 import App from '../App.svelte';
 import { DefaultAppSettings } from '../app/consts/DefaultAppSettings';
 import { TestAutomationId } from '../app/consts/TestAutomationId';
-import { MaxCount } from '../app/stores/counter';
+import { MaxCount } from '../db/counter';
 
 const enterCounterAmount = async (
   amount: number | string,
