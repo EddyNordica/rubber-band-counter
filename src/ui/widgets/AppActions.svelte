@@ -11,7 +11,7 @@
   const PromptCountButtonId = 'AppAcitons-prompt-count';
 
   let showResetDialog = false;
-  let showPrompCountModal = false;
+  let showPromptCountModal = false;
 </script>
 
 <ButtonStack>
@@ -32,7 +32,7 @@
       testId={TestAutomationId.CounterSetButton}
       text="手動入力"
       on:click={() => {
-        showPrompCountModal = true;
+        showPromptCountModal = true;
       }}
     />
   </ButtonStackItem>
@@ -51,11 +51,11 @@
   />
 {/if}
 
-{#if showPrompCountModal}
+{#if showPromptCountModal}
   <PromptCountModal
     restoreFocusId={PromptCountButtonId}
     onClose={() => {
-      showPrompCountModal = false;
+      showPromptCountModal = false;
     }}
   />
 {/if}
