@@ -36,7 +36,7 @@
       <span class="item-title">バージョン：</span>{`v${getVersion()}`}
     </li>
     <li class="list-item">
-      <span class="item-title">製作者：</span>Eddy Nordica (<Link
+      <span class="item-title">製作者：</span>Eddy (<Link
         text="Twitter"
         href="https://www.twitter.com/Eddy_Nordica"
         external
