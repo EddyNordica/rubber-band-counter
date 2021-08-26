@@ -13,6 +13,9 @@
       counterAmount.set(value);
     }
   };
+
+  const StepCount = 5;
+  const MaxCount = 200;
 </script>
 
 <style lang="scss">
@@ -50,10 +53,10 @@
     class="input"
     type="range"
     min="0"
-    max="500"
-    step="10"
+    max={`${MaxCount}`}
+    step={`${StepCount}`}
     aria-valuemin={1}
-    aria-valuemax={500}
+    aria-valuemax={MaxCount}
     aria-valuenow={$counterAmount}
     value={$counterAmount}
     on:input={onInput}
